@@ -1,0 +1,53 @@
+<datasources>
+   <datasource jndi-name="java:/jdbc/mdigitalDataSource" pool-name="mdigital-ds" enabled="true" use-java-context="true">
+      <connection-url>jdbc:jtds:sqlserver://localhost/mdigital</connection-url>
+      <driver>sqlserver</driver>
+      <security>
+         <user-name>sa</user-name>
+         <password>123456</password>
+      </security>
+	  
+      
+     <!-- ////////////////////////////////////////////////////////////////////////////// -->
+     <!-- Configurações necessárias para fechar as conexões e liberar no POOL do JBoss   -->
+     <!-- ////////////////////////////////////////////////////////////////////////////// -->
+     <pool>
+         <min-pool-size>1</min-pool-size>
+         <max-pool-size>1</max-pool-size>
+
+         <!-- Libera as conexões inativas abaixo do minino definido 
+		 <use-strict-min>true</use-strict-min>
+         -->
+		 
+         <!-- Realiza o flush de todas as conexões que estão inativas 
+         <flush-strategy>IdleConnections</flush-strategy>
+         -->
+		 
+         <!-- Realiza o flush de todas as conexões que tiveram erro na conexão
+		 <flush-strategy>FailingConnectionOnly</flush-strategy>
+         -->
+     </pool>
+	 
+     <validation>
+         <validate-on-match>false</validate-on-match>
+         <background-validation>false</background-validation>
+     </validation>
+	 
+     <timeout>
+         <set-tx-query-timeout>false</set-tx-query-timeout>
+         <blocking-timeout-millis>0</blocking-timeout-millis>
+         <idle-timeout-minutes>10</idle-timeout-minutes>
+         <query-timeout>0</query-timeout>
+         <use-try-lock>0</use-try-lock>
+         <allocation-retry>0</allocation-retry>
+         <allocation-retry-wait-millis>0</allocation-retry-wait-millis>
+     </timeout>
+	 
+     <statement>
+         <share-prepared-statements>false</share-prepared-statements>
+     </statement>
+     <!-- ////////////////////////////////////////////////////////////////////////////// -->
+      
+      	  
+   </datasource>
+</datasources>

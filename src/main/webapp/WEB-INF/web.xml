@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	
+	<display-name>marketingDigital</display-name>
+		
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+
+    <!-- =============================================================================================== -->
+	<!-- INICIO: Inicializa o contexto do do SPRING -->
+	<!-- Observação: Essa forma é usada quando não usamos outro método responsável por subir o contexto  -->
+	<!--             do Spring, RestEasy.                                                                -->
+	<!-- =============================================================================================== -->
+	<!-- 
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+    -->
+	<!-- Informa onde está o arquivo de configuração do SPRING -->
+	<!--  
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring-config.xml</param-value>
+	</context-param>
+	 -->
+    <!-- =============================================================================================== -->
+	<!-- FIM: Inicializa o contexto do do SPRING -->
+	<!-- =============================================================================================== -->
+
+
+    <!-- =============================================================================================== -->
+	<!-- INICIO: Inicializa o contexto do SPRING através do RestEasy                                     -->
+	<!-- Observação: Logo, não precisamos das configurações padrão mencionadas acima                     -->
+    <!-- =============================================================================================== -->
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>ResteasyServlet</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>br.mp.mpdft.mdigital.infra.service.AgendaApplication</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ResteasyServlet</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/api</param-value>
+	</context-param>	
+
+	<!-- Informa onde está o arquivo de configuração do SPRING -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring-config.xml</param-value>
+	</context-param>	
+	<!-- =============================================================================================== -->
+	<!-- FIM: Inicializa o contexto do SPRING através do RestEasy                                     -->
+	<!-- =============================================================================================== -->
+
+		
+	
+</web-app>
