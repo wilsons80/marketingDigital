@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html>
+
+<html ng-app="mDigital">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Marketing Digital</title>
+
+	<link rel="stylesheet" type="text/css" href="resouces/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	
+    <link rel="stylesheet" type="text/css" href="resouces/css/app.css">
+
+	<script type="text/javascript" src="resouces/js/lib/angular.js"></script>
+    <script type="text/javascript" src="resouces/js/lib/angular-route.js"></script>
+	<script type="text/javascript" src="resouces/js/lib/angular-messages.js"></script>
+	<script type="text/javascript" src="resouces/js/lib/angular-locale_pt-br.js"></script>
+     
+     
+	<!-- Adicionando os módulos do AngularJS-->
+    <script type="text/javascript" src="resouces/js/app.js"></script>
+     
+	
+	<!-- Adicionando os controllers do AngularJS -->
+    <script type="text/javascript" src="resouces/js/controllers/usuarioControllers.js"></script>
+     
+     
+	<!-- Adicionando os serviços do AngularJS -->
+    <script type="text/javascript" src="resouces/js/service/usuarioAPIService.js"></script>
+
+    
+    <!-- Adicionando os arquivos de constantes -->
+    <script type="text/javascript" src="resouces/js/value/configValue.js"></script>
+	 
 </head>
-<body>
-	Iniciando o projeto final Java - Marketing Digital (MPDFT)
+
+
+<body ng-controller="usuarioControler">
+
+	<div ng-if="!logado" 
+	     ng-include="'login.html'">
+	</div>
+	
+	<div ng-if="logado">
+		sistema de marketing digital
+	</div> 
+	
 </body>
 </html>

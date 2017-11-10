@@ -50,9 +50,10 @@
 		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>br.mp.mpdft.mdigital.infra.service.AgendaApplication</param-value>
+			<param-value>br.mp.mpdft.mdigital.infra.service.MarketingDigitalApplication</param-value>
 		</init-param>
 	</servlet>
+	
 
 	<servlet-mapping>
 		<servlet-name>ResteasyServlet</servlet-name>
