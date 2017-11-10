@@ -26,7 +26,6 @@ angular.module("mDigital").controller("usuarioControler", function($scope , usua
 							$scope.messageError = "Senha inválida!!!";
 							$scope.logado = false;
 						}else{
-							$scope.senha = $scope.usuario.senha; 
 							$scope.showMessage = false;
 							$scope.logado = true;
 						}
