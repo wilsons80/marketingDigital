@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import br.mp.mpdft.mdigital.service.ClienteService;
 import br.mp.mpdft.mdigital.service.UsuarioService;
 
 public class MarketingDigitalApplication extends Application {
@@ -15,6 +16,7 @@ public class MarketingDigitalApplication extends Application {
 	
 	public MarketingDigitalApplication() {
 		services.add(new UsuarioService());
+		services.add(new ClienteService());
 	}
 
 

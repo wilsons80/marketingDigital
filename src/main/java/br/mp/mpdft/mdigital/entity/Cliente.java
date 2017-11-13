@@ -14,7 +14,7 @@ public class Cliente {
 	@Id
 	@Column(name="idCliente", nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long  idCliente;
+	private Integer idCliente;
 	
 	@Column(name="nmNome", length=250, nullable=false)
 	private String nome;
@@ -31,11 +31,24 @@ public class Cliente {
 	@Column(name="vlRendaBrutaMensal", nullable=false, precision=2)
 	private Double rendaBrutaMensal;
 
-	public Long getIdCliente() {
+	
+	public Cliente() {
+	}
+	
+	public Cliente(Integer idCliente, String nome, String numeroDDD, String telefone, String email,Double rendaBrutaMensal) {
+		this.idCliente = idCliente; 
+		this.nome = nome;
+		this.numeroDDD = numeroDDD;
+		this.telefone = telefone;
+		this.email = email;
+		this.rendaBrutaMensal = rendaBrutaMensal;
+	}
+
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public void setIdCliente(Long idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 

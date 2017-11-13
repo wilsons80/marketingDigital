@@ -34,7 +34,7 @@ public class UsuarioService {
 	}
 	
 	@PUT
-	@Path("/{codigo}")
+	@Path("/bloquear/{codigo}")
 	@Transactional
 	@Produces(MediaType.APPLICATION_JSON)
 	public UsuarioTO bloquerUsuario(@PathParam("codigo") Integer codigo){

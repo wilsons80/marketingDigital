@@ -33,8 +33,18 @@
 	background-color: -moz-linear-gradient(top, #CCCCCC, #EEEEEE);
 }
 
+.headerAplicacao {
+	width: auto; 
+	height: 74px;
+	background-color: #D32F2F; 
+	color: #FFFFFF;
+	text-align: center; 
+	padding-top: 10px;
+}
+
 .jumbotron {
 	text-align: center;
-	background-color: #000000;
+	background-color: #D32F2F;
 	color: #FFFFFF;
+	height: 50px;
 }
