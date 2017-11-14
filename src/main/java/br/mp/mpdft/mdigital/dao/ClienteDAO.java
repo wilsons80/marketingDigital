@@ -28,7 +28,6 @@ public class ClienteDAO extends BaseDAO<Cliente>{
 		            .where(cliente.rendaBrutaMensal.between(faixaRendaInicial, faixaRendaFinal))
 		            .list(ConstructorExpression.create(ClienteTO.class, cliente.idCliente, 
 		            		                                                    cliente.nome,
-		            		                                                    cliente.numeroDDD,
 		            		                                                    cliente.telefone,
 		            		                                                    cliente.email,
 		            		                                                    cliente.rendaBrutaMensal

@@ -19,7 +19,6 @@ public class AlterarClienteCmd {
 	public ClienteTO alterar(Integer idCliente, ClienteTO clienteTO){
 		Cliente cliente = new Cliente(idCliente,
 				                      clienteTO.getNome(), 
-				                      clienteTO.getNumeroDDD(), 
 				                      clienteTO.getTelefone(), 
 				                      clienteTO.getEmail(), 
 				                      clienteTO.getRendaBrutaMensal()); 

@@ -37,7 +37,6 @@ public class CadastrarClienteCmd {
 		
 		Cliente cliente = new Cliente(null,
 				                      clienteTO.getNome(), 
-				                      clienteTO.getNumeroDDD(), 
 				                      clienteTO.getTelefone(), 
 				                      clienteTO.getEmail(), 
 				                      clienteTO.getRendaBrutaMensal());

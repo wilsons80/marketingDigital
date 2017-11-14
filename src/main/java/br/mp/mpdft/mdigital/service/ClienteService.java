@@ -24,7 +24,7 @@ import br.mp.mpdft.mdigital.cmd.cliente.ExcluirClienteByIdCmd;
 import br.mp.mpdft.mdigital.to.ClienteTO;
 
 @Component
-@Path("/clientes")
+@Path("/cliente")
 public class ClienteService {
 
 	@Autowired

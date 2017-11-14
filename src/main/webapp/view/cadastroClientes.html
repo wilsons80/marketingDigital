@@ -1,34 +1,68 @@
 <meta charset="UTF-8">
 
-<div class="headerPainel">
+<div class="headerPainel" ng-controller="appControler">
+
 	<div class="conteudoHeaderPainel">
 		Cadastro de clientes
 	</div>
+
+	{{cliente}}
 	
 	<div class="conteudoPainel">
 		<form name="formClientes">
 			<table style="width: 100%; text-align: left">
 				<tr>
 					<td>Nome:</td>
-					<td><input type="text" ng-model="nome" style="width: 90%"></td>
+					<td><input type="text" 
+					           ng-model="cliente.nome" 
+					           name="nome" 
+					           style="width: 90%"
+					           required="true"></td>
 					
 					<td>Email:</td>
-					<td><input type="text" ng-model="email" style="width: 90%"></td>
+					<td><input type="text" 
+					           ng-model="cliente.email" 
+					           name="email" 
+					           style="width: 90%"
+					           required="true"></td>
 				</tr>
 				<tr>
 					<td>Telefone:</td>
-					<td><input type="text" ng-model="telefone" style="width: 90%"></td>
+					<td><input type="text" 
+					           ng-model="cliente.telefone" 
+					           name="telefone" 
+					           style="width: 90%"></td>
 					
 					<td>Renda Bruta Mensal:</td>
-					<td><input type="text" ng-model="rendaBrutaMensal" style="width: 90%"></td>
+					<td><input type="text" 
+					           ng-model="cliente.rendaBrutaMensal" 
+					           name="rendaBrutaMensal" 
+					           style="width: 90%"
+					           required="true"></td>
 				</tr>
 			</table>
-			 
-			<button class="btn btn-success"
-			        style="margin-left: 40%"
-			        ng-click="cadastrarCliente()">Cadastrar</button>
-			 
 		</form>
+		
+        <!-- $pristine (nunca utilizado) e $dirty (Já foi utilizado) -->
+        <!-- Verifica se um formulário ou campo já foi utilizado alguma vez -->
+		<div class="alert alert-danger" 
+		     ng-if="formClientes.$dirty && formClientes.nome.$invalid" >
+
+			<div ng-show="formClientes.nome.$error.required">
+				Por favor, preencha o campo nome.
+			</div>
+			<div ng-show="formClientes.nome.$error.minlength">
+				O campo nome deve ter no mínimo 10 caracteres.
+			</div>
+		</div>
+		
+		
+				
+		<button class="btn btn-success"
+		        style="margin-left: 40%"
+		        ng-click="cadastrarCliente(cliente)"
+		        ng-disabled="formClientes.$invalid">Cadastrar</button>
+			        
 	</div>
 	
 </div>

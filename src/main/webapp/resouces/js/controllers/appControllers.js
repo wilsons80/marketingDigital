@@ -1,4 +1,6 @@
-angular.module("mDigital").controller("usuarioControler", function($scope , usuarioAPI ){
+angular.module("mDigital").controller("appControler", function($scope , $location, usuarioAPI , clienteAPI){
+	
+	$scope.formClientes = {};
 	
 	var isNaoLogado = function(){
 		return $scope.logado === undefined | $scope.logado === false;
@@ -42,5 +44,22 @@ angular.module("mDigital").controller("usuarioControler", function($scope , usua
 	$scope.loggof = function(){
 		$scope.logado  = false;
 		$scope.usuario = undefined;
-	}
+	};
+	
+	
+	$scope.cadastrarCliente = function(cliente){
+		clienteAPI.cadastrar(cliente).then(
+				function(data){
+					delete $scope.cliente;
+					
+	                //Volta o estado do formulario para pristine (nunca utilizado)
+					$scope.formClientes.$setPristine();
+					
+					//Ao salvar o contato volto para a página principal
+					$location.path("/");	
+				}
+		);
+	};
+
+	
 });

@@ -4,7 +4,6 @@ public class ClienteTO {
 	
 	private Integer idCliente;
 	private String nome;
-	private String numeroDDD;
 	private String telefone;
 	private String email;
 	private Double rendaBrutaMensal;
@@ -12,10 +11,9 @@ public class ClienteTO {
 	public ClienteTO() {
 	}
 
-	public ClienteTO(Integer idCliente, String nome, String numeroDDD, String telefone, String email, Double rendaBrutaMensal) {
+	public ClienteTO(Integer idCliente, String nome, String telefone, String email, Double rendaBrutaMensal) {
 		this.idCliente = idCliente;
 		this.nome = nome;
-		this.numeroDDD = numeroDDD;
 		this.telefone = telefone;
 		this.email = email;
 		this.rendaBrutaMensal = rendaBrutaMensal;
@@ -35,14 +33,6 @@ public class ClienteTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getNumeroDDD() {
-		return numeroDDD;
-	}
-
-	public void setNumeroDDD(String numeroDDD) {
-		this.numeroDDD = numeroDDD;
 	}
 
 	public String getTelefone() {
@@ -76,7 +66,6 @@ public class ClienteTO {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((idCliente == null) ? 0 : idCliente.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((numeroDDD == null) ? 0 : numeroDDD.hashCode());
 		result = prime * result + ((rendaBrutaMensal == null) ? 0 : rendaBrutaMensal.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
@@ -106,11 +95,6 @@ public class ClienteTO {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (numeroDDD == null) {
-			if (other.numeroDDD != null)
-				return false;
-		} else if (!numeroDDD.equals(other.numeroDDD))
-			return false;
 		if (rendaBrutaMensal == null) {
 			if (other.rendaBrutaMensal != null)
 				return false;
@@ -126,7 +110,7 @@ public class ClienteTO {
 
 	@Override
 	public String toString() {
-		return "ClienteTO [idCliente=" + idCliente + ", nome=" + nome + ", numeroDDD=" + numeroDDD + ", telefone="
+		return "ClienteTO [idCliente=" + idCliente + ", nome=" + nome + ", telefone="
 				+ telefone + ", email=" + email + ", rendaBrutaMensal=" + rendaBrutaMensal + "]";
 	}
 	

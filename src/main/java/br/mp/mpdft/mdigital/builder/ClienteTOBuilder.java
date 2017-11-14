@@ -14,7 +14,6 @@ public class ClienteTOBuilder {
 	public ClienteTO build(Cliente cliente){
 		return new ClienteTO(cliente.getIdCliente       (), 
 				             cliente.getNome            (), 
-				             cliente.getNumeroDDD       (), 
 				             cliente.getTelefone        (), 
 				             cliente.getEmail           (), 
 				             cliente.getRendaBrutaMensal());
