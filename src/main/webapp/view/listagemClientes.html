@@ -1,13 +1,34 @@
 <meta charset="UTF-8">
 
-<div class="headerPainel">
-	<div class="conteudoHeaderPainel" style="margin-top: 115px;">
-		Clientes
+<div ng-controller="appControler">
+
+	<div class="headerPainel">
+		<div class="conteudoHeaderPainel" style="margin-top: 115px;">
+			Clientes
+		</div>
+		
+		<div class="listagemMalaDireta">
+			<form name="formListagemClientes">
+			
+		        <!-- A diretiva ng-if NÃO renderiza o componente no html -->
+				<table class="table" ng-if="clientes.length > 0">
+					<th>Nome</th>
+					<th>Email</th>
+					<th>Ação</th>
+		            
+		            <!-- Busca apenas em um campo específico -->
+		            <!-- <tr ng-repeat="contato in contatos | filter: {nome: criterioDeBusca}" -->
+					<tr ng-repeat="cliente in clientes">
+						<td>{{cliente.nome}}</td>
+						<td>{{cliente.email}}</td>
+						<td></td>
+		
+					</tr>
+				</table>
+			
+			</form>
+		</div>
+		
 	</div>
-	
-	<div class="listagemMalaDireta">
-		<form name="formListagemClientes">
-		</form>
-	</div>
-	
+
 </div>

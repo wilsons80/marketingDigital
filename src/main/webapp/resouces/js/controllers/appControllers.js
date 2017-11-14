@@ -57,9 +57,22 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 					
 					//Ao salvar o contato volto para a página principal
 					$location.path("/");	
+					
+					carregarClientes();	
 				}
 		);
 	};
 
+
+	var carregarClientes = function() {
+		clienteAPI.getClientes().then(function(response){
+			$scope.clientes = response.data;	
+		}).catch( function(response){
+			console.log(response);
+			$scope.error = "Serviço temporariamento fora do ar.";
+		});
+		
+	};
+	carregarClientes();	
 	
 });
