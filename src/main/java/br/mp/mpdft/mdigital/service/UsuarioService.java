@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.mp.mpdft.mdigital.cmd.BloquearUsuarioCmd;
-import br.mp.mpdft.mdigital.cmd.BuscarUsuarioByUserNameCmd;
+import br.mp.mpdft.mdigital.cmd.usuario.BloquearUsuarioCmd;
+import br.mp.mpdft.mdigital.cmd.usuario.BuscarUsuarioByUserNameCmd;
 import br.mp.mpdft.mdigital.to.UsuarioTO;
 
 @Component

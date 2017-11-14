@@ -1,4 +1,4 @@
-package br.mp.mpdft.mdigital.cmd;
+package br.mp.mpdft.mdigital.cmd.cliente;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ import br.mp.mpdft.mdigital.builder.ClienteTOBuilder;
 import br.mp.mpdft.mdigital.dao.ClienteDAO;
 import br.mp.mpdft.mdigital.entity.Cliente;
 import br.mp.mpdft.mdigital.excpetion.EmailClienteNaoInformadoException;
-import br.mp.mpdft.mdigital.excpetion.NomeClienteNaoInformadoException;
+import br.mp.mpdft.mdigital.excpetion.NomeNaoInformadoException;
 import br.mp.mpdft.mdigital.excpetion.RendaBrutaMensalNaoInformadaException;
 import br.mp.mpdft.mdigital.to.ClienteTO;
 
@@ -28,7 +28,7 @@ public class CadastrarClienteCmd {
 		}
 		
 		if(Objects.isNull(clienteTO.getNome())){
-			new NomeClienteNaoInformadoException("O nome do cliente não foi informado.");
+			new NomeNaoInformadoException("O nome do cliente não foi informado.");
 		}
 		
 		if(Objects.isNull(clienteTO.getEmail())){

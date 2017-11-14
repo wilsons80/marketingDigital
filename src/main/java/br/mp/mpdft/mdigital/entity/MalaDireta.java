@@ -1,14 +1,10 @@
 package br.mp.mpdft.mdigital.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +14,7 @@ public class MalaDireta {
 	@Id
 	@Column(name="idMalaDireta", nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long  idMalaDireta;
+	private Integer idMalaDireta;
 
 	@Column(name="nmNome", length=250, nullable=false)
 	private String nome;
@@ -29,14 +25,22 @@ public class MalaDireta {
 	@Column(name="vlFaixaRendaFinal", nullable=false)
 	private Double faixaRendaFinal;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	private List<Cliente> clientes;
-
-	public Long getIdMalaDireta() {
+	public MalaDireta() {
+	}
+	
+	public MalaDireta(Integer idMalaDireta, String nome, Double faixaRendaInicial, Double faixaRendaFinal) {
+		this.idMalaDireta      = idMalaDireta;
+		this.nome              = nome;
+		this.faixaRendaInicial = faixaRendaInicial;
+		this.faixaRendaFinal   = faixaRendaFinal;
+	}
+	
+	
+	public Integer getIdMalaDireta() {
 		return idMalaDireta;
 	}
 
-	public void setIdMalaDireta(Long idMalaDireta) {
+	public void setIdMalaDireta(Integer idMalaDireta) {
 		this.idMalaDireta = idMalaDireta;
 	}
 
@@ -64,19 +68,11 @@ public class MalaDireta {
 		this.faixaRendaFinal = faixaRendaFinal;
 	}
 
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((clientes == null) ? 0 : clientes.hashCode());
 		result = prime * result + ((faixaRendaFinal == null) ? 0 : faixaRendaFinal.hashCode());
 		result = prime * result + ((faixaRendaInicial == null) ? 0 : faixaRendaInicial.hashCode());
 		result = prime * result + ((idMalaDireta == null) ? 0 : idMalaDireta.hashCode());
@@ -93,11 +89,6 @@ public class MalaDireta {
 		if (getClass() != obj.getClass())
 			return false;
 		MalaDireta other = (MalaDireta) obj;
-		if (clientes == null) {
-			if (other.clientes != null)
-				return false;
-		} else if (!clientes.equals(other.clientes))
-			return false;
 		if (faixaRendaFinal == null) {
 			if (other.faixaRendaFinal != null)
 				return false;

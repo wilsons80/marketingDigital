@@ -27,6 +27,5 @@ create table mala_direta(
 	nmNome varchar(250) not null,
 	vlFaixaRendaInicial numeric(8,2) not null,
 	vlFaixaRendaFinal numeric(8,2) not null,
-	idCliente int foreign key references cliente (idCliente),
 	primary key(idMalaDireta)
 );

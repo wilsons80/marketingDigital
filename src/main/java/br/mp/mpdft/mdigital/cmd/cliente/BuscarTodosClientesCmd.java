@@ -1,4 +1,4 @@
-package br.mp.mpdft.mdigital.cmd;
+package br.mp.mpdft.mdigital.cmd.cliente;
 
 import java.util.List;
 

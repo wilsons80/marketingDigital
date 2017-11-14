@@ -1,38 +1,28 @@
 package br.mp.mpdft.mdigital.to;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 public class MalaDiretaTO {
 	
-	private Long  codigo;
+	private Integer codigo;
 	private String nome;
 	private Double faixaRendaInicial;
 	private Double faixaRendaFinal;
-	private List<ClienteTO> clientes;
 
 	public MalaDiretaTO() {
 	}
 
-	public MalaDiretaTO(Long codigo, String nome, Double faixaRendaInicial, Double faixaRendaFinal,List<ClienteTO> clientes) {
+	public MalaDiretaTO(Integer codigo, String nome, Double faixaRendaInicial, Double faixaRendaFinal) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.faixaRendaInicial = faixaRendaInicial;
 		this.faixaRendaFinal = faixaRendaFinal;
-		this.clientes = clientes;
 	}
 
-	public void addClientes(List<ClienteTO> clientes){
-		if(Objects.isNull(this.clientes)){this.clientes = new ArrayList<ClienteTO>();}
-		this.clientes.addAll(clientes);
-	}
-	
-	public Long getCodigo() {
+
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 
@@ -60,15 +50,12 @@ public class MalaDiretaTO {
 		this.faixaRendaFinal = faixaRendaFinal;
 	}
 
-	public List<ClienteTO> getClientes() {
-		return clientes;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((clientes == null) ? 0 : clientes.hashCode());
+		//result = prime * result + ((clientes == null) ? 0 : clientes.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((faixaRendaFinal == null) ? 0 : faixaRendaFinal.hashCode());
 		result = prime * result + ((faixaRendaInicial == null) ? 0 : faixaRendaInicial.hashCode());
@@ -85,11 +72,14 @@ public class MalaDiretaTO {
 		if (getClass() != obj.getClass())
 			return false;
 		MalaDiretaTO other = (MalaDiretaTO) obj;
+		
+		/*
 		if (clientes == null) {
 			if (other.clientes != null)
 				return false;
 		} else if (!clientes.equals(other.clientes))
 			return false;
+		*/
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;

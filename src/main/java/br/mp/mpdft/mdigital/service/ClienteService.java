@@ -16,11 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.mp.mpdft.mdigital.cmd.AlterarClienteCmd;
-import br.mp.mpdft.mdigital.cmd.BuscarClientesPorRendaBrutaCmd;
-import br.mp.mpdft.mdigital.cmd.BuscarTodosClientesCmd;
-import br.mp.mpdft.mdigital.cmd.CadastrarClienteCmd;
-import br.mp.mpdft.mdigital.cmd.ExcluirClienteByIdCmd;
+import br.mp.mpdft.mdigital.cmd.cliente.AlterarClienteCmd;
+import br.mp.mpdft.mdigital.cmd.cliente.BuscarClientesPorRendaBrutaCmd;
+import br.mp.mpdft.mdigital.cmd.cliente.BuscarTodosClientesCmd;
+import br.mp.mpdft.mdigital.cmd.cliente.CadastrarClienteCmd;
+import br.mp.mpdft.mdigital.cmd.cliente.ExcluirClienteByIdCmd;
 import br.mp.mpdft.mdigital.to.ClienteTO;
 
 @Component

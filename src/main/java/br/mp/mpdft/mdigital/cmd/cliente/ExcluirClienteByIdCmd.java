@@ -1,4 +1,4 @@
-package br.mp.mpdft.mdigital.cmd;
+package br.mp.mpdft.mdigital.cmd.cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
