@@ -1,6 +1,11 @@
-angular.module("mDigital").controller("appControler", function($scope , $location, usuarioAPI , clienteAPI){
-	
+angular.module("mDigital").controller("appControler", function($scope , $location, usuarioAPI , clienteAPI, malaDigitalAPI){
 	$scope.formClientes = {};
+	$scope.formMalaDireta = {};
+	
+	$scope.isRenderFormCadCliente = true;
+	
+	
+	//$scope.clientes = clienteAPI.getClientes();
 	
 	var isNaoLogado = function(){
 		return $scope.logado === undefined | $scope.logado === false;
@@ -58,11 +63,26 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 					//Ao salvar o contato volto para a página principal
 					$location.path("/");	
 					
-					carregarClientes();	
+					carregarClientes();
 				}
 		);
 	};
 
+	$scope.cadastrarMalaDireta = function(malaDireta){
+		malaDigitalAPI.cadastrar(malaDireta).then(
+				function(data){
+					delete $scope.malaDireta;
+					
+	                //Volta o estado do formulario para pristine (nunca utilizado)
+					$scope.formMalaDireta.$setPristine();
+					
+					//Ao salvar o contato volto para a página principal
+					$location.path("/");	
+					
+					carregarMalaDiretas();
+				}
+		);
+	};
 
 	var carregarClientes = function() {
 		clienteAPI.getClientes().then(function(response){
@@ -75,4 +95,30 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 	};
 	carregarClientes();	
 	
+	var carregarMalaDiretas = function(){
+		malaDigitalAPI.getMalaDiretas().then(function(response){
+			$scope.malaDiretas = response.data;
+		}).catch(function(response){
+			console.log(response);
+			$scope.error = "Serviço temporariamento fora do ar.";
+		});
+	};
+	carregarMalaDiretas();
+	
+	$scope.renderFormCadastroCliente = function(){
+		$scope.isRenderFormCadCliente = true;
+		return $scope.isRenderFormCadCliente;
+	};
+	
+	$scope.renderFormCadastroMalaDireta = function(){
+		$scope.isRenderFormCadCliente = false;
+		return !$scope.isRenderFormCadCliente;
+	};
+	
+	$scope.home = function(){
+		//Ao salvar o contato volto para a página principal
+		$location.path("/");	
+	}
+	
+
 });
