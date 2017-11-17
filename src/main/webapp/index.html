@@ -3,27 +3,17 @@
 <html ng-app="mDigital">
 <head>
 	<meta charset="UTF-8">
+	<base href="/marketingDigital/">
+	
 	<title>Marketing Digital</title>
 
 	<link rel="stylesheet" type="text/css" href="resouces/css/bootstrap.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
-	<!-- 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
-	 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	 -->
-	 
     <link rel="stylesheet" type="text/css" href="resouces/css/app.css">
 
 	<script type="text/javascript" src="resouces/js/lib/angular.js"></script>
@@ -45,15 +35,17 @@
     <script type="text/javascript" src="resouces/js/service/clienteAPIService.js"></script>
     <script type="text/javascript" src="resouces/js/service/malaDiretaAPIService.js"></script>
     
-
-    
     <!-- Adicionando os arquivos de constantes -->
     <script type="text/javascript" src="resouces/js/value/configValue.js"></script>
-	 
+    
+    <!-- Adiciona os arquivo de rotas -->
+    <script type="text/javascript" src="resouces/js/config/routeConfig.js"></script>
+ 
 </head>
 
 <body ng-controller="appControler">
 
+    Logado: {{logado}}
 	<div class="aplicacao">
 		<div ng-show="logado">
 		
@@ -78,7 +70,7 @@
 			      
 			    </ul>
 			    <span class="navbar-text" style="float: right;">
-			       Olá {{usuario.username}} <a href="!#/login.html" class="btn btn-success">Log Off</a>
+			       Olá {{usuario.username}} <a href="#" ng-click="loggof()" class="btn btn-success">Log Off</a>
 			    </span>
 			  </div>
 			</nav>
@@ -183,8 +175,8 @@
 								
 						<button class="btn btn-success"
 						        style="margin-left: 40%"
-						        ng-click="cadastrarCliente(cliente)"
-						        ng-disabled="formClientes.$invalid">Cadastrar</button>
+						        ng-click="salvarCliente(cliente)"
+						        ng-disabled="formClientes.$invalid">Salvar</button>
 					</div>
 				</div>
 			</div>
@@ -229,11 +221,37 @@
 									            <!-- Busca apenas em um campo específico -->
 									            <!-- <tr ng-repeat="contato in contatos | filter: {nome: criterioDeBusca}" -->
 												<tr ng-repeat="malaDireta in malaDiretas">
-													<td class="text-center">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}  </td>
+													<td class="text-center">
+													    <div ng-if="isHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
+													        Inicial
+													    	<input type="text" 
+													    	       ng-model="malaDireta.faixaRendaInicial" 
+													    	       name="faixaRendaInicial" 
+													    	       style="width: 70px"/>
+													    	
+													    	Final       
+													    	<input type="text" 
+													    	       ng-model="malaDireta.faixaRendaFinal" 
+													    	       name="faixaRendaInicial" 
+													    	       style="width: 70px"/>
+
+													    	<a href="#" ng-click="salvarMalaDireta(malaDireta)"><span class="glyphicon glyphicon-save"></span>Salvar</a>
+													    </div>
+													    
+													    <div ng-if="isNotHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
+															<a href="#" ng-click="getClientesMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
+													    </div>
+													</td>
 													
 													<td class="text-center">
-												    	<a href="#"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                                        <a href="#" style="padding-left: 10px"> <span class="glyphicon glyphicon-ban-circle"></span></a>
+												    	<a href="#" ng-click="habilitaAlteracaoMalaDireta(malaDireta.codigo)">
+												    	    <span class="glyphicon glyphicon-pencil"></span>
+												    	</a>
+												    	
+                                                        <a href="#" style="padding-left: 10px"
+                                                                    ng-click="excluirMalaDireta(malaDireta.codigo)"> 
+                                                                    <span class="glyphicon glyphicon-ban-circle"></span>
+                                                        </a>
                                                     </td>                                  
 												</tr>
 										</table>
@@ -269,8 +287,13 @@
 													<td>{{cliente.email}}</td>
 													
 													<td class="text-center">
-												    	<a href="#"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                                        <a href="#" style="padding-left: 10px"> <span class="glyphicon glyphicon-ban-circle"></span></a>
+												    	<a href="#" ng-click="carregarDadosClente(cliente)"><span class="glyphicon glyphicon-pencil"></span></a>
+												    	
+                                                        <a href="#" style="padding-left: 10px"
+                                                                    ng-click="excluirCliente(cliente.idCliente)"> 
+                                                                    <span class="glyphicon glyphicon-ban-circle"></span>
+                                                        </a>
+                                                        
                                                     </td>                                  
 												</tr>
 											</table>
@@ -285,7 +308,7 @@
 		</div>
 		
 		<div ng-if="!logado" 
-		     ng-include="'login.html'">
+		     ng-include="'view/login.html'">
 		</div>
 	</div>
 </body>

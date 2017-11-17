@@ -52,7 +52,16 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 	};
 	
 	
-	$scope.cadastrarCliente = function(cliente){
+	$scope.salvarCliente = function(cliente){
+		//O cliente já existe
+		if(cliente.idCliente > 0 ){
+			alterarCliente(cliente);
+		}else{
+			cadastrarCliente(cliente);
+		}
+	}
+	
+	var cadastrarCliente = function(cliente){
 		clienteAPI.cadastrar(cliente).then(
 				function(data){
 					delete $scope.cliente;
@@ -67,7 +76,37 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 				}
 		);
 	};
+	
+	var alterarCliente = function(cliente){
+		clienteAPI.alterar(cliente).then( function(response){
+			delete $scope.cliente;
+			$scope.formClientes.$setPristine();
+			carregarClientes();
+		}).catch(function(response){
+			console.log(response);
+			$scope.error = "Não foi possível alterar o Cliente de código: " + idCliente;
+		});
+	}
+	
+	$scope.carregarDadosClente = function(cliente){
+		$scope.cliente = angular.copy(cliente);
+	}
+	
+	$scope.excluirCliente = function(idCliente){
+		if (confirm("Deseja realmente excluir esse registro ?")) {
+			clienteAPI.excluir(idCliente).then(function(data){
+				delete $scope.cliente;
+				carregarClientes();
+				
+			}).catch(function(data){
+				console.log(response);
+				$scope.error = "Não foi possível excluir o Cliente de código: " + idCliente;
+			});
+		}
+	};
+	
 
+	
 	$scope.cadastrarMalaDireta = function(malaDireta){
 		malaDigitalAPI.cadastrar(malaDireta).then(
 				function(data){
@@ -82,8 +121,26 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 					carregarMalaDiretas();
 				}
 		);
+	};	
+	$scope.excluirMalaDireta = function(idMalaDireta){
+		if (confirm("Deseja realmente excluir esse registro ?")) {
+			malaDigitalAPI.excluir(idMalaDireta).then(function(data){
+				delete $scope.malaDireta;
+				carregarMalaDiretas();
+				
+			}).catch(function(data){
+				console.log(response);
+				$scope.error = "Não foi possível excluir a Mala Direta de código: " + idMalaDireta;
+			});
+		}
 	};
-
+	
+	$scope.getClientesMalaDireta = function(malaDireta){
+		malaDigitalAPI.getClientesMalaDireta(malaDireta).then( function(response){
+			$scope.clientes = response.data;
+		});
+	};
+	
 	var carregarClientes = function() {
 		clienteAPI.getClientes().then(function(response){
 			$scope.clientes = response.data;	
@@ -116,8 +173,47 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 	};
 	
 	$scope.home = function(){
+		delete $scope.cliente;
+		delete $scope.malaDireta;
+		
+		_permiteAlterarMalaDireta = false;
+		_idMalaDiretaEdicao = 0;
+		
 		//Ao salvar o contato volto para a página principal
-		$location.path("/");	
+		$location.path("/");
+	
+		carregarMalaDiretas();
+		carregarClientes();	
+	}
+	
+	var _idMalaDiretaEdicao = 0;
+	$scope.habilitaAlteracaoMalaDireta = function(codigo){
+		_permiteAlterarMalaDireta = !_permiteAlterarMalaDireta;
+		_idMalaDiretaEdicao = codigo;
+	}
+	
+	var _permiteAlterarMalaDireta = false;
+	$scope.isHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+		return _permiteAlterarMalaDireta && codigoEdicao === _idMalaDiretaEdicao;
+	}
+	
+	$scope.isNotHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+		return !$scope.isHabilitaAlteracaoMalaDireta(codigoEdicao);
+	}
+	
+	
+	$scope.salvarMalaDireta = function(malaDireta){
+		malaDigitalAPI.alterar(malaDireta).then(function(response){
+			delete $scope.malaDireta;
+			
+			carregarMalaDiretas();
+		}).catch(function(response){
+			console.log(response);
+			$scope.error = "Não foi possível alterar a Mala Direta de código: " + idCliente;
+		});
+		
+		_permiteAlterarMalaDireta = false;
+		_idMalaDiretaEdicao = 0;
 	}
 	
 
