@@ -19,11 +19,16 @@ angular.module("mDigital").factory("malaDigitalAPI", function($http, config){
 		return $http.put(config.baseURL + "maladireta/" + malaDireta.codigo, malaDireta , { headers: 'application/json' });
 	}
 	
+	var _getMalaDiretaPorFaixa = function(faixaInicial, faixaFinal){
+		return $http.get(config.baseURL + "maladireta/" + malaDireta.faixaRendaInicial + "/" + malaDireta.faixaRendaFinal);
+	}
+	
 	return {
 		getMalaDiretas : _getMalaDiretas,
 		cadastrar : _cadastrar,
 		excluir : _excluir,
 		getClientesMalaDireta : _getClientesMalaDireta,
-		alterar : _alterar
+		alterar : _alterar,
+		getMalaDiretaPorFaixa : _getMalaDiretaPorFaixa
 	}
 });

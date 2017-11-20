@@ -35,9 +35,17 @@
 	margin-top: 6px;
 }
 
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}
+
 .headerAplicacao {
 	width: auto; 
-	height: 74px;
+	height: 60px;
 	background-color: #D32F2F; 
 	color: #FFFFFF;
 	text-align: center; 

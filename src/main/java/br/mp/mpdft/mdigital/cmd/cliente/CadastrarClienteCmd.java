@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import br.mp.mpdft.mdigital.builder.ClienteTOBuilder;
 import br.mp.mpdft.mdigital.dao.ClienteDAO;
 import br.mp.mpdft.mdigital.entity.Cliente;
+import br.mp.mpdft.mdigital.excpetion.ClienteJaCadastradoException;
 import br.mp.mpdft.mdigital.excpetion.EmailClienteNaoInformadoException;
 import br.mp.mpdft.mdigital.excpetion.NomeNaoInformadoException;
 import br.mp.mpdft.mdigital.excpetion.RendaBrutaMensalNaoInformadaException;
@@ -33,6 +34,11 @@ public class CadastrarClienteCmd {
 		
 		if(Objects.isNull(clienteTO.getEmail())){
 			new EmailClienteNaoInformadoException("O email do cliente não foi informado.");
+		}
+		
+		ClienteTO email = clienteDAO.buscarClientePorEmail(clienteTO.getEmail());
+		if(Objects.nonNull(email)){
+			throw new ClienteJaCadastradoException("Cliente já está cadastrado na base com o email: " + email);
 		}
 		
 		Cliente cliente = new Cliente(null,

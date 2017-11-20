@@ -74,7 +74,10 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 					
 					carregarClientes();
 				}
-		);
+		).catch(function(response){
+			console.log(response);
+			$scope.error = "Não foi possível cadastrar o Cliente.";
+		});;
 	};
 	
 	var alterarCliente = function(cliente){
@@ -109,7 +112,7 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 	
 	$scope.cadastrarMalaDireta = function(malaDireta){
 		malaDigitalAPI.cadastrar(malaDireta).then(
-				function(data){
+				function(response){
 					delete $scope.malaDireta;
 					
 	                //Volta o estado do formulario para pristine (nunca utilizado)
@@ -120,8 +123,13 @@ angular.module("mDigital").controller("appControler", function($scope , $locatio
 					
 					carregarMalaDiretas();
 				}
-		);
+		).catch(function(response){
+			console.log(response);
+			$scope.error = "Não foi possível cadastrar a Mala Direta.";
+		});
 	};	
+	
+	
 	$scope.excluirMalaDireta = function(idMalaDireta){
 		if (confirm("Deseja realmente excluir esse registro ?")) {
 			malaDigitalAPI.excluir(idMalaDireta).then(function(data){

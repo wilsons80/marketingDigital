@@ -19,6 +19,17 @@ public class ClienteDAO extends BaseDAO<Cliente>{
 	public ClienteDAO() {
 	}
 	
+	public ClienteTO buscarClientePorEmail(String email){
+		HibernateQuery query = new HibernateQuery(getSession());
+		return query.from(cliente)
+	            .where(cliente.email.eq(email))
+	            .singleResult(ConstructorExpression.create(ClienteTO.class, cliente.idCliente, 
+	            		                                                    cliente.nome,
+	            		                                                    cliente.telefone,
+	            		                                                    cliente.email,
+	            		                                                    cliente.rendaBrutaMensal
+	            		                                                    ));
+	}
 	
 	public List<ClienteTO> getClientesPorMalaDireta(Double faixaRendaInicial, Double faixaRendaFinal ){
 		HibernateQuery query = new HibernateQuery(getSession());
@@ -32,6 +43,7 @@ public class ClienteDAO extends BaseDAO<Cliente>{
 		            		                                                    cliente.email,
 		            		                                                    cliente.rendaBrutaMensal
 		            		                                                    ));
+		// @formatter:off
 
 	}
 }
