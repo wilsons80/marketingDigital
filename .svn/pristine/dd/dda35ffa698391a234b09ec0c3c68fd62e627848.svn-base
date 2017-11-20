@@ -1,0 +1,60 @@
+.aplicacao {
+	width: 950px;
+	text-align: left;
+	margin-top: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.login {
+	width: 350px;
+	text-align: left;
+	margin-top: 155px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-group {
+	margin-top: 10px;
+}
+
+.headerPainel {
+	background-color: #E0E0E0;
+	height: 25px;
+	margin-top: -20px;
+}
+.conteudoHeaderPainel{
+	margin-left: 35px;
+	font-weight: bold;
+	
+}
+
+.conteudoPainel{
+	border: 1px solid #CCCCCC;
+	background-color: -moz-linear-gradient(top, #CCCCCC, #EEEEEE);
+	margin-top: 6px;
+}
+
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}
+
+.headerAplicacao {
+	width: auto; 
+	height: 60px;
+	background-color: #D32F2F; 
+	color: #FFFFFF;
+	text-align: center; 
+	padding-top: 10px;
+}
+
+.jumbotron {
+	text-align: center;
+	background-color: #D32F2F;
+	color: #FFFFFF;
+	height: 50px;
+}

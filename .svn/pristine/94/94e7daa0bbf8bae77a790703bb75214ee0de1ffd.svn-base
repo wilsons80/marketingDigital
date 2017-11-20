@@ -1,0 +1,161 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.mp.mpdft.mdigital</groupId>
+	<artifactId>marketingDigital</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
+	
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<spring.version>3.2.18.RELEASE</spring.version>
+		<resteasy.version>3.0.10.Final</resteasy.version>
+		<hibernate.version>3.6.10.Final</hibernate.version>
+		<querydsl.version>2.7.2</querydsl.version>
+	</properties>
+
+
+
+	<dependencies>
+
+		<!-- ======================================================================== -->
+		<!-- Inicio: Dependências necessárias para o framework SPRING -->
+		<!-- ======================================================================== -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- ======================================================================== -->
+		<!-- Fim: Dependências necessárias para o framework SPRING -->
+		<!-- ======================================================================== -->
+
+
+		<!-- ======================================================================== -->
+		<!-- Inicio: Dependências necessárias para o RestEasy interagir com o SPRING -->
+		<!-- ======================================================================== -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-spring</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+		<!-- ======================================================================== -->
+		<!-- Fim: Dependências necessárias para o RestEasy interagir com o SPRING -->
+		<!-- ======================================================================== -->
+
+
+		<!-- ======================================================================== -->
+		<!-- Inicio: Dependência para o Hibernate                                     -->
+		<!-- ======================================================================== -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.2-GA</version>
+		</dependency>
+		<!-- ======================================================================== -->
+		<!-- Fim: Dependência para o Hibernate                                     -->
+		<!-- ======================================================================== -->
+
+
+
+		<!-- ======================================================================== -->
+		<!-- Inicio: Dependência para o conexão com o Banco de Dados (SQL Server)     -->
+		<!-- ======================================================================== -->
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<!-- ======================================================================== -->
+	    <!-- Fim: Dependência para o conexão com o Banco de Dados (SQL Server)     -->
+		<!-- ======================================================================== -->
+
+
+		<!-- ======================================================================== -->
+		<!-- Inicio: Dependência para o QueryDsl                                      -->
+		<!-- ======================================================================== -->
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+			<version>${querydsl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+			<version>${querydsl.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- ======================================================================== -->
+		<!-- Fim: Dependência para o QueryDsl                                      -->
+		<!-- ======================================================================== -->
+		
+		
+	</dependencies>
+
+
+
+	<build>
+		<finalName>marketingDigital</finalName>
+		
+		<plugins>
+		
+		    <!-- Inclusão do Plugin do QueryDsl -->
+			<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+
+						<configuration>
+						    <!-- Local onde ficaram as classes QueryDsl que serão usada para a criação de SQL -->
+							<outputDirectory>target/generated-sources/querydsl</outputDirectory>
+							<processor>com.mysema.query.apt.hibernate.HibernateAnnotationProcessor</processor>
+
+							<options>
+								<querydsl.entityAccessors>true</querydsl.entityAccessors>
+							</options>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>		
+	</build>
+	
+</project>

@@ -1,0 +1,20 @@
+<!DOCTYPE xml>
+<Context path="context.root" relodable="true" >
+
+    <!-- Caso queira usar o Wildfly é necessário:  -->
+    <!--    1 - Comentar as configurações abaixo da tag Resouce -->
+    <!--    2 - Criar um arquivo dataSource na pasta standalone -->
+    
+      
+    <!-- Configuração usada apenas para o Tomcat
+	<Resource name="mdigitalDataSource" 
+	          auth="Container" 
+	          type="javax.sql.DataSource"
+		      username="sa" 
+		      password="123456" 
+		      url="jdbc:jtds:sqlserver://localhost/mdigital"
+		      driverClassName="net.sourceforge.jtds.jdbc.Driver" 
+		      validationQuery="select 1" />
+	 --> 
+</Context>
+
