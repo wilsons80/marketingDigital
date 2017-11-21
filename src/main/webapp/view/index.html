@@ -1,0 +1,23 @@
+<meta charset="utf-8"></meta>
+
+<div class="aplicacao">
+	
+	<div ng-include="'view/cadastroClientes.html'"></div>
+
+	<div class="headerAplicacao" ui-alert title="Ops, aconteceu um problema!" message="error" ng-show="isError" ></div>
+	<br>
+
+	<div>
+		<table style="width: 100%">
+			<tr>
+				<td style="width: 50%">
+					<div ng-include="'view/listagemMalaDireta.html'"></div>
+				</td>
+				<td style="width: 50%">
+					<div ng-include="'view/listagemClientes.html'"></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+</div>

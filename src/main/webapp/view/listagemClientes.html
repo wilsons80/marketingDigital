@@ -1,7 +1,6 @@
 <meta charset="UTF-8">
 
-<div ng-controller="appControler">
-
+<div>
 	<div class="headerPainel">
 		<div class="conteudoHeaderPainel" style="margin-top: 115px;">
 			Clientes
@@ -22,14 +21,17 @@
 					<tr ng-repeat="cliente in clientes">
 						<td>{{cliente.nome}}</td>
 						<td>{{cliente.email}}</td>
-						<td></td>
-		
+						
+						<td class="text-center">
+					    	<a href="#" ng-click="carregarDadosClente(cliente)"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                 <a href="#" style="padding-left: 10px"
+                                                             ng-click="excluirCliente(cliente.idCliente)"> 
+                                                             <span class="glyphicon glyphicon-ban-circle"></span>
+                                                 </a>
+                                             </td>                                  
 					</tr>
 				</table>
-			
 			</form>
 		</div>
-		
 	</div>
-
-</div>
+</div>							
