@@ -1,12 +1,13 @@
-angular.module("mDigital").controller("malaDiretaController",function($scope , $location, malaDigitalAPI){
-	
-	$scope.cadastrarMalaDireta = function(malaDireta){
+angular.module("mDigital").controller("malaDiretaController",function($location, clienteAPI, malaDigitalAPI){
+	var vm = this;
+
+	vm.cadastrarMalaDireta = function(malaDireta){
 		malaDigitalAPI.cadastrar(malaDireta).then(
 				function(response){
-					delete $scope.malaDireta;
+					delete vm.malaDireta;
 					
 	                //Volta o estado do formulario para pristine (nunca utilizado)
-					$scope.formMalaDireta.$setPristine();
+					vm.formMalaDireta.$setPristine();
 					
 					//Ao salvar o contato volto para a página principal
 					$location.path("/");	
@@ -15,54 +16,77 @@ angular.module("mDigital").controller("malaDiretaController",function($scope , $
 				}
 		).catch(function(response){
 			console.log(response);
-			$scope.error = "Não foi possível cadastrar a Mala Direta.";
+			vm.error = "Não foi possível cadastrar a Mala Direta.";
 		});
 	};	
 	
 	
-	$scope.excluirMalaDireta = function(idMalaDireta){
+	vm.excluirMalaDireta = function(idMalaDireta){
 		if (confirm("Deseja realmente excluir esse registro ?")) {
 			malaDigitalAPI.excluir(idMalaDireta).then(function(data){
-				delete $scope.malaDireta;
+				delete vm.malaDireta;
 				carregarMalaDiretas();
 				
 			}).catch(function(data){
 				console.log(response);
-				$scope.error = "Não foi possível excluir a Mala Direta de código: " + idMalaDireta;
+				vm.error = "Não foi possível excluir a Mala Direta de código: " + idMalaDireta;
 			});
 		}
 	};
 	
-	$scope.salvarMalaDireta = function(malaDireta){
+	vm.salvarMalaDireta = function(malaDireta){
 		malaDigitalAPI.alterar(malaDireta).then(function(response){
-			delete $scope.malaDireta;
+			delete vm.malaDireta;
 			
 			carregarMalaDiretas();
 		}).catch(function(response){
 			console.log(response);
-			$scope.error = "Não foi possível alterar a Mala Direta de código: " + idCliente;
+			vm.error = "Não foi possível alterar a Mala Direta de código: " + idCliente;
 		});
 		
 		_permiteAlterarMalaDireta = false;
 		_idMalaDiretaEdicao = 0;
 	};
 	
-	
-	var carregarMalaDiretas = function(){
-		malaDigitalAPI.getMalaDiretas().then(function(response){
-			$scope.malaDiretas = response.data;
-		}).catch(function(response){
-			console.log(response);
-			$scope.error = "Serviço temporariamento fora do ar.";
+	vm.renderFormCadastroMalaDireta = function(){
+		vm.isRenderFormCadCliente = false;
+		return !vm.isRenderFormCadCliente;
+	};
+
+	var carregarClientes = function() {
+		clienteAPI.getClientes().then(function(response){
+			vm.clientes = response.data;	
 		});
 	};
-	carregarMalaDiretas();
-	
-	
-	
-	$scope.renderFormCadastroMalaDireta = function(){
-		$scope.isRenderFormCadCliente = false;
-		return !$scope.isRenderFormCadCliente;
+	carregarClientes();	
+
+	var carregarMalaDiretas = function(){
+		malaDigitalAPI.getMalaDiretas().then(function(response){
+			vm.malaDiretas = response.data;
+		});
 	};
+	carregarMalaDiretas();	
+
+	
+	/*////////////////////////////////*/
+	/*Código duplicado*/
+	var _idMalaDiretaEdicao = 0;
+	vm.habilitaAlteracaoMalaDireta = function(codigo){
+		_permiteAlterarMalaDireta = !_permiteAlterarMalaDireta;
+		_idMalaDiretaEdicao = codigo;
+	}
+
+	
+	var _permiteAlterarMalaDireta = false;
+	vm.isHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+		return _permiteAlterarMalaDireta && codigoEdicao === _idMalaDiretaEdicao;
+	}
+	
+	vm.isNotHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+		return !vm.isHabilitaAlteracaoMalaDireta(codigoEdicao);
+	}
+	/*////////////////////////////////*/
+
+	
 	
 })

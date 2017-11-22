@@ -1,83 +1,101 @@
-angular.module("mDigital").controller("clienteController", function($scope , $location, clienteAPI){
+angular.module("mDigital").controller("clienteController", function( $location, clienteAPI, malaDigitalAPI){
+	var vm = this;
 	
-	$scope.salvarCliente = function(cliente){
+	vm.salvarCliente = function(cliente){
 		//O cliente já existe
 		if(cliente.idCliente > 0 ){
-			alterarCliente(cliente);
+			vm.alterarCliente(cliente);
 		}else{
-			cadastrarCliente(cliente);
+			vm.cadastrarCliente(cliente);
 		}
 	}	
 	
-	var cadastrarCliente = function(cliente){
+	vm.cadastrarCliente = function(cliente){
+		console.log(cliente);
+		
 		clienteAPI.cadastrar(cliente).then(
 				function(data){
-					delete $scope.cliente;
+					delete vm.cliente;
 					
 	                //Volta o estado do formulario para pristine (nunca utilizado)
-					$scope.formClientes.$setPristine();
+					//vm.formClientes.$setPristine();
 					
 					//Ao salvar o contato volto para a página principal
-					$location.path("/");	
+					$location.path("/view/cadastroCliente");	
 					
 					carregarClientes();
 				}
 		).catch(function(response){
 			console.log(response);
-			$scope.error = "Não foi possível cadastrar o Cliente.";
+			vm.error = "Não foi possível cadastrar o Cliente.";
 		});;
 	};
 	
-	var alterarCliente = function(cliente){
+	vm.alterarCliente = function(cliente){
 		clienteAPI.alterar(cliente).then( function(response){
-			delete $scope.cliente;
-			$scope.formClientes.$setPristine();
+			delete vm.cliente;
+			//vm.formClientes.$setPristine();
 			carregarClientes();
 		}).catch(function(response){
 			console.log(response);
-			$scope.error = "Não foi possível alterar o Cliente de código: " + idCliente;
+			vm.error = "Não foi possível alterar o Cliente de código: " + idCliente;
 		});
 	}
 	
-	$scope.carregarDadosClente = function(cliente){
-		$scope.cliente = angular.copy(cliente);
+	vm.carregarDadosClente = function(cliente){
+		vm.cliente = angular.copy(cliente);
 	}
 	
-	$scope.excluirCliente = function(idCliente){
+	vm.excluirCliente = function(idCliente){
 		if (confirm("Deseja realmente excluir esse registro ?")) {
 			clienteAPI.excluir(idCliente).then(function(data){
-				delete $scope.cliente;
+				delete vm.cliente;
 				carregarClientes();
 				
 			}).catch(function(data){
 				console.log(response);
-				$scope.error = "Não foi possível excluir o Cliente de código: " + idCliente;
+				vm.error = "Não foi possível excluir o Cliente de código: " + idCliente;
 			});
 		}
 	};
 	
-	$scope.getClientesMalaDireta = function(malaDireta){
+	vm.getClientesMalaDireta = function(malaDireta){
 		malaDigitalAPI.getClientesMalaDireta(malaDireta).then( function(response){
-			$scope.clientes = response.data;
+			vm.clientes = response.data;
 		});
 	};
 	
+	vm.renderFormCadastroCliente = function(){
+		vm.isRenderFormCadCliente = true;
+		return vm.isRenderFormCadCliente;
+	};
+
+	
+	/*////////////////////////////////*/
+	/*Código duplicado*/
 	var carregarClientes = function() {
 		clienteAPI.getClientes().then(function(response){
-			$scope.clientes = response.data;	
-		}).catch( function(response){
-			console.log(response);
-			$scope.error = "Serviço temporariamento fora do ar.";
+			vm.clientes = response.data;	
 		});
-		
 	};
 	carregarClientes();	
 
-	
-	$scope.renderFormCadastroCliente = function(){
-		$scope.isRenderFormCadCliente = true;
-		return $scope.isRenderFormCadCliente;
+	var carregarMalaDiretas = function(){
+		malaDigitalAPI.getMalaDiretas().then(function(response){
+			vm.malaDiretas = response.data;
+		});
 	};
-	
+	carregarMalaDiretas();	
 
+	var _permiteAlterarMalaDireta = false;
+	vm.isHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+		return _permiteAlterarMalaDireta && codigoEdicao === _idMalaDiretaEdicao;
+	}
+	
+	vm.isNotHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+		return !vm.isHabilitaAlteracaoMalaDireta(codigoEdicao);
+	}
+	/*////////////////////////////////*/
+	
+	
 });

@@ -1,44 +1,57 @@
-angular.module("mDigital").controller("appControler", function($scope , $location, usuarioAPI , clienteAPI, malaDigitalAPI){
-	$scope.formClientes = {};
-	$scope.formMalaDireta = {};
+angular.module("mDigital").controller("appControler", function($location, usuarioAPI , clienteAPI, malaDigitalAPI){
+
+	//Isola o scope
+	var vm = this;
 	
-	$scope.isRenderFormCadCliente = true;
+	vm.formClientes = {};
+	vm.formMalaDireta = {};
 	
-	$scope.home = function(){
-		delete $scope.cliente;
-		delete $scope.malaDireta;
+	vm.isRenderFormCadCliente = true;
+	
+	vm.home = function(){
+		delete vm.cliente;
+		delete vm.malaDireta;
 		
 		_permiteAlterarMalaDireta = false;
 		_idMalaDiretaEdicao = 0;
 		
 		//Ao salvar o contato volto para a página principal
 		$location.path("view/index.xhtml");
-	
-		//carregarMalaDiretas();
-		//carregarClientes();	
 	}
 	
 	var _idMalaDiretaEdicao = 0;
-	$scope.habilitaAlteracaoMalaDireta = function(codigo){
+	vm.habilitaAlteracaoMalaDireta = function(codigo){
 		_permiteAlterarMalaDireta = !_permiteAlterarMalaDireta;
 		_idMalaDiretaEdicao = codigo;
 	}
 	
+	
+	
+	var carregarClientes = function() {
+		clienteAPI.getClientes().then(function(response){
+			vm.clientes = response.data;	
+		});
+	};
+	carregarClientes();	
+
+	var carregarMalaDiretas = function(){
+		malaDigitalAPI.getMalaDiretas().then(function(response){
+			vm.malaDiretas = response.data;
+		});
+	};
+	carregarMalaDiretas();
+	
+	
+	/*////////////////////////////////*/
+	/*Código duplicado*/
 	var _permiteAlterarMalaDireta = false;
-	$scope.isHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+	vm.isHabilitaAlteracaoMalaDireta = function(codigoEdicao){
 		return _permiteAlterarMalaDireta && codigoEdicao === _idMalaDiretaEdicao;
 	}
 	
-	$scope.isNotHabilitaAlteracaoMalaDireta = function(codigoEdicao){
-		return !$scope.isHabilitaAlteracaoMalaDireta(codigoEdicao);
+	vm.isNotHabilitaAlteracaoMalaDireta = function(codigoEdicao){
+		return !vm.isHabilitaAlteracaoMalaDireta(codigoEdicao);
 	}
-	
-	
-	$scope.cadastroCliente = function(){
-		//Ao salvar o contato volto para a página principal
-		$location.path("view/cadastroClientes.html");
-
-	}
-	
+	/*////////////////////////////////*/
 
 });

@@ -8,15 +8,15 @@
 	<div class="listagemMalaDireta">
 		<form name="formListagemMalaDireta">
 			<table class="table table-striped table-bordered" 
-				   ng-if="malaDiretas.length > 0">
+				   ng-if="vm.malaDiretas.length > 0">
 			
 					<th class="text-center">Faixa de Renda</th>
 					<th class="text-center">Ações</th>
 		            
 		            <!-- Busca apenas em um campo específico -->
-					<tr ng-repeat="malaDireta in malaDiretas">
+					<tr ng-repeat="malaDireta in vm.malaDiretas">
 						<td class="text-center">
-						    <div ng-if="isHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
+						    <div ng-if="vm.isHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
 						        Inicial
 						    	<input type="text" 
 						    	       ng-model="malaDireta.faixaRendaInicial" 
@@ -29,21 +29,21 @@
 						    	       name="faixaRendaInicial" 
 						    	       style="width: 70px"/>
 
-						    	<a href="#" ng-click="salvarMalaDireta(malaDireta)"><span class="glyphicon glyphicon-save"></span>Salvar</a>
+						    	<a href="#/view/cadastroMalaDireta" ng-click="vm.salvarMalaDireta(malaDireta)"><span class="glyphicon glyphicon-save"></span>Salvar</a>
 						    </div>
 						    
-						    <div ng-if="isNotHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
-								<a href="#" ng-click="getClientesMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
+						    <div ng-if="vm.isNotHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
+								<a href="#/view/cadastroMalaDireta" ng-click="vm.getClientesMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
 						    </div>
 						</td>
 						
 						<td class="text-center">
-					    	<a href="#" ng-click="habilitaAlteracaoMalaDireta(malaDireta.codigo)">
+					    	<a href="#/view/alterarMalaDireta" ng-click="vm.habilitaAlteracaoMalaDireta(malaDireta.codigo)">
 					    	    <span class="glyphicon glyphicon-pencil"></span>
 					    	</a>
 					    	
-                            <a href="#" style="padding-left: 10px"
-                                        ng-click="excluirMalaDireta(malaDireta.codigo)"> 
+                            <a href="#/view/cadastroMalaDireta" style="padding-left: 10px"
+                                        ng-click="vm.excluirMalaDireta(malaDireta.codigo)"> 
                                         <span class="glyphicon glyphicon-ban-circle"></span>
                             </a>
                         </td>                                  
