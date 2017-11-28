@@ -1,6 +1,16 @@
-angular.module("mDigital").controller("loginController", function($scope, $location, usuarioAPI){
-	var vm = $scope;
+'use strict';
+
+angular.module("mDigital").controller("loginController", function($location, usuarioAPI, $rootScope, $routeParams){
 	
+	/* jshint validvm: true */
+	var vm = this;
+
+	vm.usuario = null;
+	
+    vm.$onInit = function () {
+    };
+    
+    
 	var isNaoLogado = function(){
 		return vm.logado === undefined | vm.logado === false;
 	}
@@ -28,7 +38,9 @@ angular.module("mDigital").controller("loginController", function($scope, $locat
 							vm.logado = false;
 						}else{
 							vm.showMessage = false;
-							vm.logado = true;
+							vm.logado      = true;
+							
+							$location.path("/index");
 						}
 					}
 					
@@ -38,13 +50,14 @@ angular.module("mDigital").controller("loginController", function($scope, $locat
 				})	
 			}
 		}
-		
-		$location.path("/view/index");
 	};
+	
+	
+
 	
 	vm.loggof = function(){
 		vm.logado  = false;
-		vm.usuario = undefined;
+		vm.usuario = null;
 	};
 	
 	

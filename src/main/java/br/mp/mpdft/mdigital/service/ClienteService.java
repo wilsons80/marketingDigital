@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.mp.mpdft.mdigital.cmd.cliente.AlterarClienteCmd;
+import br.mp.mpdft.mdigital.cmd.cliente.BuscarClienteByIDCmd;
 import br.mp.mpdft.mdigital.cmd.cliente.BuscarClientesPorRendaBrutaCmd;
 import br.mp.mpdft.mdigital.cmd.cliente.BuscarTodosClientesCmd;
 import br.mp.mpdft.mdigital.cmd.cliente.CadastrarClienteCmd;
@@ -37,6 +38,9 @@ public class ClienteService {
 	private BuscarTodosClientesCmd buscarTodosClientesCmd;
 	
 	@Autowired
+	private BuscarClienteByIDCmd buscarClienteByIDCmd; 
+	
+	@Autowired
 	private ExcluirClienteByIdCmd excluirClienteByIdCmd;
 	
 	@Autowired
@@ -50,7 +54,14 @@ public class ClienteService {
 		return buscarTodosClientesCmd.getAll();
 	}
 	
-	
+	@GET
+	@Path("/{idCliente}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Transactional
+	public ClienteTO getCliente(@PathParam("idCliente") Integer idCliente){
+		return buscarClienteByIDCmd.getClienteToByID(idCliente);
+	}
+		
 	@GET
 	@Path("/faixaRenda/{faixaRendaInicial}/{faixaRendaFinal}")
 	@Produces(MediaType.APPLICATION_JSON)

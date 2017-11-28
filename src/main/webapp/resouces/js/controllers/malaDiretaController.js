@@ -1,6 +1,15 @@
-angular.module("mDigital").controller("malaDiretaController",function($location, clienteAPI, malaDigitalAPI){
+angular.module("mDigital").controller("malaDiretaController",function($location, malaDigitalAPI){
 	var vm = this;
-
+	vm.malaDiretas = null;
+	
+	
+	vm.$onInit = function(){
+		malaDigitalAPI.getMalaDiretas().then(function(response){
+			vm.malaDiretas = response.data;
+		});
+	};
+	
+	
 	vm.cadastrarMalaDireta = function(malaDireta){
 		malaDigitalAPI.cadastrar(malaDireta).then(
 				function(response){
@@ -12,7 +21,6 @@ angular.module("mDigital").controller("malaDiretaController",function($location,
 					//Ao salvar o contato volto para a página principal
 					$location.path("/");	
 					
-					carregarMalaDiretas();
 				}
 		).catch(function(response){
 			console.log(response);
@@ -25,7 +33,6 @@ angular.module("mDigital").controller("malaDiretaController",function($location,
 		if (confirm("Deseja realmente excluir esse registro ?")) {
 			malaDigitalAPI.excluir(idMalaDireta).then(function(data){
 				delete vm.malaDireta;
-				carregarMalaDiretas();
 				
 			}).catch(function(data){
 				console.log(response);
@@ -38,7 +45,6 @@ angular.module("mDigital").controller("malaDiretaController",function($location,
 		malaDigitalAPI.alterar(malaDireta).then(function(response){
 			delete vm.malaDireta;
 			
-			carregarMalaDiretas();
 		}).catch(function(response){
 			console.log(response);
 			vm.error = "Não foi possível alterar a Mala Direta de código: " + idCliente;
@@ -53,30 +59,8 @@ angular.module("mDigital").controller("malaDiretaController",function($location,
 		return !vm.isRenderFormCadCliente;
 	};
 
-	var carregarClientes = function() {
-		clienteAPI.getClientes().then(function(response){
-			vm.clientes = response.data;	
-		});
-	};
-	carregarClientes();	
-
-	var carregarMalaDiretas = function(){
-		malaDigitalAPI.getMalaDiretas().then(function(response){
-			vm.malaDiretas = response.data;
-		});
-	};
-	carregarMalaDiretas();	
-
-	
 	/*////////////////////////////////*/
 	/*Código duplicado*/
-	var _idMalaDiretaEdicao = 0;
-	vm.habilitaAlteracaoMalaDireta = function(codigo){
-		_permiteAlterarMalaDireta = !_permiteAlterarMalaDireta;
-		_idMalaDiretaEdicao = codigo;
-	}
-
-	
 	var _permiteAlterarMalaDireta = false;
 	vm.isHabilitaAlteracaoMalaDireta = function(codigoEdicao){
 		return _permiteAlterarMalaDireta && codigoEdicao === _idMalaDiretaEdicao;
@@ -85,8 +69,7 @@ angular.module("mDigital").controller("malaDiretaController",function($location,
 	vm.isNotHabilitaAlteracaoMalaDireta = function(codigoEdicao){
 		return !vm.isHabilitaAlteracaoMalaDireta(codigoEdicao);
 	}
-	/*////////////////////////////////*/
-
+	/*////////////////////////////////*/	
 	
 	
 })

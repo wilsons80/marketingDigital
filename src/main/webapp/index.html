@@ -28,10 +28,15 @@
 	<!-- Adicionando os módulos do AngularJS-->
     <script type="text/javascript" src="resouces/js/app.js"></script>
      
-	
+	<!-- Adicionando os serviços do AngularJS -->
+    <script type="text/javascript" src="resouces/js/service/usuarioAPIService.js"></script>
+    <script type="text/javascript" src="resouces/js/service/clienteAPIService.js"></script>
+    <script type="text/javascript" src="resouces/js/service/malaDiretaAPIService.js"></script>
+    
 	<!-- Adicionando os controllers do AngularJS -->
     <script type="text/javascript" src="resouces/js/controllers/appControllers.js"></script>
-    <script type="text/javascript" src="resouces/js/controllers/clienteController.js"></script>
+    <script type="text/javascript" src="resouces/js/controllers/listaClienteController.js"></script>
+    <script type="text/javascript" src="resouces/js/controllers/formClienteController.js"></script>
     <script type="text/javascript" src="resouces/js/controllers/malaDiretaController.js"></script>
     <script type="text/javascript" src="resouces/js/controllers/loginController.js"></script>
      
@@ -43,10 +48,7 @@
     <script type="text/javascript" src="resouces/js/interceptors/errorInterceptor.js"></script>
     <script type="text/javascript" src="resouces/js/interceptors/loadingInterceptor.js"></script>
      
-	<!-- Adicionando os serviços do AngularJS -->
-    <script type="text/javascript" src="resouces/js/service/usuarioAPIService.js"></script>
-    <script type="text/javascript" src="resouces/js/service/clienteAPIService.js"></script>
-    <script type="text/javascript" src="resouces/js/service/malaDiretaAPIService.js"></script>
+
     
     <!-- Adicionando os arquivos de constantes -->
     <script type="text/javascript" src="resouces/js/value/configValue.js"></script>
@@ -59,7 +61,8 @@
 
 <body>
 	<div class="aplicacao">
-		<div ng-view></div>
+		<div ng-view>
+		</div>
 	</div>
 </body>
 </html>

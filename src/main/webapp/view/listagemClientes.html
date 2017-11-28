@@ -1,9 +1,9 @@
 <meta charset="UTF-8">
 
-<div>
+<div ng-controller="listarClienteController as vm">
 	<div class="headerPainel">
 		<div class="conteudoHeaderPainel" style="margin-top: 115px;">
-			Clientes
+			Clientes - {{cliente}}
 		</div>
 		
 		<div class="listagemMalaDireta">
@@ -23,11 +23,11 @@
 						<td>{{cliente.email}}</td>
 						
 						<td class="text-center">
-					    	<a href="#/view/cadastroCliente" ng-click="vm.carregarDadosClente(cliente)"><span class="glyphicon glyphicon-pencil"></span></a>
+					    	<a href="#/cliente/{{cliente.idCliente}}"><span class="glyphicon glyphicon-pencil"></span></a>
 					    	
-                            <a href="#/view/cadastroCliente" style="padding-left: 10px"
-                                        ng-click="vm.excluirCliente(cliente.idCliente)"> 
-                                        <span class="glyphicon glyphicon-ban-circle"></span>
+                            <a href="#/cadastroCliente" style="padding-left: 10px"
+                                                        ng-click="vm.excluirCliente(cliente.idCliente)"> 
+                                 <span class="glyphicon glyphicon-ban-circle"></span>
                             </a>
                          </td>                                  
 					</tr>

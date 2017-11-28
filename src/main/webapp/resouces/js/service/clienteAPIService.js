@@ -8,6 +8,10 @@ angular.module("mDigital").factory("clienteAPI", function($http, config){
 		return $http.get(config.baseURL + "cliente");
 	}
 	
+	var _getCliente = function(idCliente){
+		return $http.get(config.baseURL + "cliente/" + idCliente);
+	}
+	
 	var _excluir = function(idCliente){
 		return $http.delete(config.baseURL + "cliente/" + idCliente);
 	};
@@ -17,10 +21,11 @@ angular.module("mDigital").factory("clienteAPI", function($http, config){
 	}
 	
 	return {
-		cadastrar : _cadastrar,
+		cadastrar   : _cadastrar,
 		getClientes : _getClientes,
-		excluir : _excluir,
-		alterar : _alterar 
+		getCliente  : _getCliente,
+		excluir     : _excluir,
+		alterar     : _alterar 
 	}
 	
 });
