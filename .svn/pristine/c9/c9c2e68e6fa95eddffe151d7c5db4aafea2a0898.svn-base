@@ -1,0 +1,59 @@
+<meta charset="UTF-8">
+
+<div class="headerPainel"  ng-controller="listaMalaDiretaController as vm">
+	<div class="conteudoHeaderPainel" style="margin-top: 115px;">
+		Malas Diretas
+	</div>
+	
+	<div class="listagemMalaDireta">
+		<form name="vm.formListagemMalaDireta">
+			<table class="table table-striped table-bordered" 
+				   ng-if="vm.malaDiretas.length > 0">
+			
+					<th class="text-center">Faixa de Renda</th>
+					<th class="text-center">Ações</th>
+		            
+		            <!-- Busca apenas em um campo específico -->
+					<tr ng-repeat="malaDireta in vm.malaDiretas">
+						<td class="text-center">
+						    <div ng-if="vm.isHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
+						        Inicial
+						    	<input type="text" 
+						    	       ng-model="malaDireta.faixaRendaInicial" 
+						    	       name="faixaRendaInicial" 
+						    	       style="width: 70px"/>
+						    	
+						    	Final       
+						    	<input type="text" 
+						    	       ng-model="malaDireta.faixaRendaFinal" 
+						    	       name="faixaRendaInicial" 
+						    	       style="width: 70px"/>
+
+						    	<a href="#/malaDireta" 
+						    	   ng-click="vm.salvarMalaDireta(malaDireta)">
+						    	      <span class="glyphicon glyphicon-save"></span>Salvar
+						    	</a>
+						    </div>
+						    
+						    <div ng-if="vm.isNotHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
+								<a href="#/malaDireta" ng-click="vm.getClientesMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
+						    </div>
+						</td>
+						
+						<td class="text-center">
+					    	<a href="#/malaDireta" ng-click="vm.habilitaAlteracaoMalaDireta(malaDireta.codigo)">
+					    	    <span class="glyphicon glyphicon-pencil"></span>
+					    	</a>
+					    	
+                            <a href="#/malaDireta" 
+                               style="padding-left: 10px"
+                               ng-click="vm.excluirMalaDireta(malaDireta.codigo)"> 
+                                 <span class="glyphicon glyphicon-ban-circle"></span>
+                            </a>
+                        </td>                                  
+					</tr>
+			</table>
+		</form>
+	</div>
+</div>							
+

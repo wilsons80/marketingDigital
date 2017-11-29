@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html ng-app="mDigital">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<base href="/marketingDigital/">
+	
+	<title>Marketing Digital</title>
+
+	<link rel="stylesheet" type="text/css" href="resouces/css/bootstrap.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="resouces/css/app.css">
+
+	<script type="text/javascript" src="resouces/js/lib/angular.js"></script>
+    <script type="text/javascript" src="resouces/js/lib/angular-route.js"></script>
+	<script type="text/javascript" src="resouces/js/lib/angular-messages.js"></script>
+	<script type="text/javascript" src="resouces/js/lib/angular-locale_pt-br.js"></script>
+     
+     
+	<!-- Adicionando os módulos do AngularJS-->
+    <script type="text/javascript" src="resouces/js/app.js"></script>
+     
+	<!-- Adicionando os serviços do AngularJS -->
+    <script type="text/javascript" src="resouces/js/service/usuarioAPIService.js"></script>
+    <script type="text/javascript" src="resouces/js/service/clienteAPIService.js"></script>
+    <script type="text/javascript" src="resouces/js/service/malaDiretaAPIService.js"></script>
+    
+	<!-- Adicionando os controllers do AngularJS -->
+    <script type="text/javascript" src="resouces/js/controllers/appControllers.js"></script>
+    <script type="text/javascript" src="resouces/js/controllers/listaClienteController.js"></script>
+    <script type="text/javascript" src="resouces/js/controllers/formClienteController.js"></script>
+    
+    <script type="text/javascript" src="resouces/js/controllers/formMalaDiretaController.js"></script>
+    <script type="text/javascript" src="resouces/js/controllers/listaMalaDiretaController.js"></script>
+    <script type="text/javascript" src="resouces/js/controllers/loginController.js"></script>
+     
+
+	<!-- Adicionando as Directivas -->
+    <script type="text/javascript" src="resouces/js/directives/uiAlertDirective.js"></script>
+
+	<!-- Adicionando os Interceptors -->
+    <script type="text/javascript" src="resouces/js/interceptors/errorInterceptor.js"></script>
+    <script type="text/javascript" src="resouces/js/interceptors/loadingInterceptor.js"></script>
+     
+
+    
+    <!-- Adicionando os arquivos de constantes -->
+    <script type="text/javascript" src="resouces/js/value/configValue.js"></script>
+    
+    <!-- Adiciona os arquivo de rotas -->
+    <script type="text/javascript" src="resouces/js/config/routeConfig.js"></script>
+    <script type="text/javascript" src="resouces/js/config/interceptorConfig.js"></script>
+ 
+</head>
+
+<body>
+	<div class="aplicacao">
+		<div ng-view>
+		</div>
+	</div>
+</body>
+</html>

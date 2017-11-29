@@ -5,10 +5,10 @@
         Marketing Digital 
     </div>
     
-	<form name="formLogin" ng-controller="loginController as vm">
+	<form name="formLogin" ng-controller="loginController">
 		<div class="login">
-	        <div class="alert alert-danger" role="alert" ng-if="vm.showMessage">
-			   {{vm.messageError}}
+	        <div class="alert alert-danger" role="alert" ng-if="showMessage">
+			   {{messageError}}
 			</div>
 	
 			<div class="form-group">
@@ -18,7 +18,7 @@
 				       id="userName" 
 				       aria-describedby="emailHelp"
 					   placeholder="Nome do usuário"
-					   ng-model="vm.userName"
+					   ng-model="userName"
 					   required="true">
 			</div>
 	
@@ -28,12 +28,12 @@
 					   class="form-control" 
 					   id="senha" 
 					   placeholder="Senha do usuário"
-					   ng-model="vm.senha"
+					   ng-model="senha"
 					   required="true">
 			</div>
 	
 			<button class="btn btn-primary btn-block"
-		            ng-click="vm.logar(vm.userName, vm.senha)">
+		            ng-click="vm.logar(userName, senha)">
 		        <a href="#/index"></a>Logar
 		    </button>
 	

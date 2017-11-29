@@ -1,0 +1,13 @@
+<meta charset="utf-8"></meta>
+
+<div class="aplicacao" ng-controller="appControler as vm">
+
+	<div ng-include="'view/menu.html'"></div>
+	
+	<div ng-include="'view/cliente/cadastroClientes.html'"></div>
+	
+	<div class="headerAplicacao" ui-alert title="Ops, aconteceu um problema!" message="error" ng-show="isError" ></div><br>
+	
+	<div ng-include="'view/listagem.html'"></div>
+		
+</div>

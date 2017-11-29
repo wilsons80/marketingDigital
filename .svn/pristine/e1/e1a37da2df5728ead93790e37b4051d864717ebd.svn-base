@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+
+<div style="margin-top:20px" ng-controller="formMalaDiretaController as vm">
+
+	<div class="headerPainel">
+		<div class="conteudoHeaderPainel">
+			Cadastro de Mala Direta <br>
+		</div>
+		
+		<div class="conteudoPainel">
+			<form name="vm.formMalaDireta">
+				<table style="width: 100%; text-align: center; margin-top: 15px;">
+					<tr>
+						<td><input type="text" 
+						           ng-model="vm.malaDireta.nome" 
+						           name="nomeMadaDireta" 
+						           style="width: 90%"
+						           placeholder="Nome da mala direta"
+						           ng-required="true"></td>
+						
+						<td><input type="text" 
+						           ng-model="vm.malaDireta.faixaRendaInicial" 
+						           name="faixaRendaInicial" 
+						           style="width: 90%"
+						           placeholder="Faixa de Renda Inicial"
+						           ng-required="true"></td>
+						           
+						<td><input type="text" 
+						           ng-model="vm.malaDireta.faixaRendaFinal" 
+						           name="faixaRendaFinal" 
+						           style="width: 90%"
+						           placeholder="Faixa de Renda Final"
+						           ng-required="true"></td>
+					</tr>
+				</table>
+			</form>
+			
+			<button class="btn btn-success"
+			        style="margin-left: 40%; margin-top: 20px;"
+			        ng-click="vm.cadastrarMalaDireta(vm.malaDireta)"
+			        ng-disabled="vm.formMalaDireta.$invalid">Cadastrar</button>
+			
+		</div>
+	</div>
+	
+	<div style="padding-top: 100px" ng-if="false">
+		{{"Válido: " + formMalaDireta.$valid}} <br>
+		{{"Inválido: " + formMalaDireta.$invalid}}<br>
+		pristine: {{formMalaDireta.$pristine}}<br>
+		dirty: {{formMalaDireta.$dirty}}<br>
+	    Mala Diretas: {{malaDiretas}}
+	</div>	
+</div>
+

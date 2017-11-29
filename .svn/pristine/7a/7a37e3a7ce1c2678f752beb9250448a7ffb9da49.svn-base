@@ -1,0 +1,78 @@
+<meta charset="UTF-8">
+
+
+<div style="margin-top:20px" ng-controller="formClienteController as vm">
+    
+	<div class="headerPainel">
+		<div class="conteudoHeaderPainel">
+			Cadastro de clientes
+		</div>
+		
+		<div class="conteudoPainel">
+			<form name="vm.formClientes">
+				<table style="width: 100%; text-align: left">
+					<tr>
+						<td>Nome:</td>
+						<td><input type="text" 
+						           ng-model="vm.cliente.nome" 
+						           name="nome" 
+						           style="width: 90%"
+						           ng-required="true"></td>
+						
+						<td>Email:</td>
+						<td><input type="text" 
+						           ng-model="vm.cliente.email" 
+						           name="email" 
+						           style="width: 90%"
+						           ng-required="true"></td>
+					</tr>
+					<tr>
+						<td>Telefone:</td>
+						<td><input type="text" 
+						           ng-model="vm.cliente.telefone" 
+						           name="telefone" 
+						           style="width: 90%"></td>
+						
+						<td>Renda Bruta Mensal:</td>
+						<td><input type="text" 
+						           ng-model="vm.cliente.rendaBrutaMensal" 
+						           name="rendaBrutaMensal" 
+						           style="width: 90%"
+						           ng-required="true"></td>
+					</tr>
+				</table>
+			</form>
+			
+	        <!-- $pristine (nunca utilizado) e $dirty (Já foi utilizado) -->
+	        <!-- Verifica se um formulário ou campo já foi utilizado alguma vez -->
+			<div class="alert alert-danger" 
+			     ng-if="vm.formClientes.$dirty && vm.formClientes.nome.$invalid" >
+	
+				<div ng-show="vm.formClientes.nome.$error.required">
+					Por favor, preencha o campo nome.
+				</div>
+				<div ng-show="vm.formClientes.nome.$error.minlength">
+					O campo nome deve ter no mínimo 10 caracteres.
+				</div>
+			</div>
+					
+			<button class="btn btn-success"
+			        style="margin-left: 40%"
+			        ng-click="vm.salvarCliente(vm.cliente)"
+			        ng-disabled="vm.formClientes.$invalid">Cadastrar</button>
+				        
+		</div>
+	</div>
+	
+	<div style="padding-top: 100px" ng-if="false">
+		{{"Válido: " + formClientes.$valid}} <br>
+		{{"Inválido: " + formClientes.$invalid}}<br>
+		pristine: {{formClientes.$pristine}}<br>
+		dirty: {{formClientes.$dirty}}<br>
+	    Cliente: {{cliente}}
+	</div>
+</div>
+
+
+
+
