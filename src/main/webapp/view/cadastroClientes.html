@@ -9,7 +9,7 @@
 		</div>
 		
 		<div class="conteudoPainel">
-			<form name="formClientes">
+			<form name="vm.formClientes">
 				<table style="width: 100%; text-align: left">
 					<tr>
 						<td>Nome:</td>
@@ -46,12 +46,12 @@
 	        <!-- $pristine (nunca utilizado) e $dirty (Já foi utilizado) -->
 	        <!-- Verifica se um formulário ou campo já foi utilizado alguma vez -->
 			<div class="alert alert-danger" 
-			     ng-if="formClientes.$dirty && formClientes.nome.$invalid" >
+			     ng-if="vm.formClientes.$dirty && vm.formClientes.nome.$invalid" >
 	
-				<div ng-show="formClientes.nome.$error.required">
+				<div ng-show="vm.formClientes.nome.$error.required">
 					Por favor, preencha o campo nome.
 				</div>
-				<div ng-show="formClientes.nome.$error.minlength">
+				<div ng-show="vm.formClientes.nome.$error.minlength">
 					O campo nome deve ter no mínimo 10 caracteres.
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 			<button class="btn btn-success"
 			        style="margin-left: 40%"
 			        ng-click="vm.salvarCliente(vm.cliente)"
-			        ng-disabled="formClientes.$invalid"><a href="#/index"></a>Cadastrar</button>
+			        ng-disabled="vm.formClientes.$invalid">Cadastrar</button>
 				        
 		</div>
 	</div>

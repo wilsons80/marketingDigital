@@ -40,29 +40,33 @@ angular.module("mDigital").controller("formClienteController", function($locatio
 		
 		clienteAPI.cadastrar(cliente).then(
 				function(data){
-					novoCliente();
+					delete vm.cliente;
+					
+					$rootScope.$broadcast("atualizarListaClientes", null);					
 					
 	                //Volta o estado do formulario para pristine (nunca utilizado)
-					//vm.formClientes.$setPristine();
-					
+					vm.formClientes.$setPristine();
+
 					//Ao salvar o contato volto para a página principal
-					$location.path("/view/cadastroCliente");	
+					$location.path("/cliente");	
 				}
-		).catch(function(response){
-			console.log(response);
-			vm.error = "Não foi possível cadastrar o Cliente.";
-		});;
+		);
 	};
 	
 	
 	vm.alterarCliente = function(cliente){
 		clienteAPI.alterar(cliente).then( function(response){
-			novoCliente();
-		}).catch(function(response){
-			console.log(response);
-			vm.error = "Não foi possível alterar o Cliente de código: " + idCliente;
+			delete vm.cliente;
+			
+			$rootScope.$broadcast("atualizarListaClientes", null);					
+			
+            //Volta o estado do formulario para pristine (nunca utilizado)
+			vm.formClientes.$setPristine();
+
+			//Ao salvar o contato volto para a página principal
+			$location.path("/cliente");	
 		});
 	}
 		
-	
+
 })

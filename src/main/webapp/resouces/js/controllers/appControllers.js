@@ -9,6 +9,7 @@ angular.module("mDigital").controller("appControler", function(usuarioAPI){
     	usuarioAPI.getUsuario("wilson.carvalho").then(function(response){
     		vm.usuario = response.data;
     	});
+    	
     };
 	
     vm.home = function(){

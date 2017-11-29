@@ -13,21 +13,26 @@ angular.module("mDigital").config( function($routeProvider, $locationProvider ){
 	
 	$routeProvider.when('/index', {
 		templateUrl : 'view/index.html',
-		controller : 'appControler'
-	});	
-	
-	$routeProvider.when('/listarCliente', {
-		redirectTo : '/index'
+		controller : 'appControler',
+		controllerAs: 'vm'
 	});	
 	
 	$routeProvider.when('/cliente/:id', {
 		templateUrl : 'view/index.html',
-		controller : 'formClienteController'
+		controller : 'formClienteController',
+		controllerAs: 'vm'
+	});
+	
+	$routeProvider.when('/cliente', {
+		templateUrl : 'view/index.html',
+		controller : 'listarClienteController',
+		controllerAs: 'vm'
 	});	
 
 	$routeProvider.when('/cadastroMalaDireta', {
 		templateUrl : 'view/index.html',
 		controller : 'malaDiretaController',
+		controllerAs: 'vm',
 			
 		resolve : {
 			malaDiretas: function (malaDigitalAPI) {
