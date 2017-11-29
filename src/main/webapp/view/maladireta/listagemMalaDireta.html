@@ -1,12 +1,12 @@
 <meta charset="UTF-8">
 
-<div class="headerPainel"  ng-controller="malaDiretaController as vm">
+<div class="headerPainel"  ng-controller="listaMalaDiretaController as vm">
 	<div class="conteudoHeaderPainel" style="margin-top: 115px;">
 		Malas Diretas
 	</div>
 	
 	<div class="listagemMalaDireta">
-		<form name="formListagemMalaDireta">
+		<form name="vm.formListagemMalaDireta">
 			<table class="table table-striped table-bordered" 
 				   ng-if="vm.malaDiretas.length > 0">
 			
@@ -29,22 +29,26 @@
 						    	       name="faixaRendaInicial" 
 						    	       style="width: 70px"/>
 
-						    	<a href="#/view/cadastroMalaDireta" ng-click="vm.salvarMalaDireta(malaDireta)"><span class="glyphicon glyphicon-save"></span>Salvar</a>
+						    	<a href="#/malaDireta" 
+						    	   ng-click="vm.salvarMalaDireta(malaDireta)">
+						    	      <span class="glyphicon glyphicon-save"></span>Salvar
+						    	</a>
 						    </div>
 						    
 						    <div ng-if="vm.isNotHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
-								<a href="#/view/cadastroMalaDireta" ng-click="vm.getClientesMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
+								<a href="#/malaDireta" ng-click="vm.getClientesMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
 						    </div>
 						</td>
 						
 						<td class="text-center">
-					    	<a href="#/view/alterarMalaDireta" ng-click="vm.habilitaAlteracaoMalaDireta(malaDireta.codigo)">
+					    	<a href="#/malaDireta" ng-click="vm.habilitaAlteracaoMalaDireta(malaDireta.codigo)">
 					    	    <span class="glyphicon glyphicon-pencil"></span>
 					    	</a>
 					    	
-                            <a href="#/view/cadastroMalaDireta" style="padding-left: 10px"
-                                        ng-click="vm.excluirMalaDireta(malaDireta.codigo)"> 
-                                        <span class="glyphicon glyphicon-ban-circle"></span>
+                            <a href="#/malaDireta" 
+                               style="padding-left: 10px"
+                               ng-click="vm.excluirMalaDireta(malaDireta.codigo)"> 
+                                 <span class="glyphicon glyphicon-ban-circle"></span>
                             </a>
                         </td>                                  
 					</tr>

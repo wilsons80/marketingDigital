@@ -1,8 +1,6 @@
 <meta charset="UTF-8">
 
-<div ng-include="'view/menu.html'"></div>
-
-<div style="margin-top:20px">
+<div style="margin-top:20px" ng-controller="formMalaDiretaController as vm">
 
 	<div class="headerPainel">
 		<div class="conteudoHeaderPainel">
@@ -10,25 +8,25 @@
 		</div>
 		
 		<div class="conteudoPainel">
-			<form name="formMalaDireta">
+			<form name="vm.formMalaDireta">
 				<table style="width: 100%; text-align: center; margin-top: 15px;">
 					<tr>
 						<td><input type="text" 
-						           ng-model="malaDireta.nome" 
+						           ng-model="vm.malaDireta.nome" 
 						           name="nomeMadaDireta" 
 						           style="width: 90%"
 						           placeholder="Nome da mala direta"
 						           ng-required="true"></td>
 						
 						<td><input type="text" 
-						           ng-model="malaDireta.faixaRendaInicial" 
+						           ng-model="vm.malaDireta.faixaRendaInicial" 
 						           name="faixaRendaInicial" 
 						           style="width: 90%"
 						           placeholder="Faixa de Renda Inicial"
 						           ng-required="true"></td>
 						           
 						<td><input type="text" 
-						           ng-model="malaDireta.faixaRendaFinal" 
+						           ng-model="vm.malaDireta.faixaRendaFinal" 
 						           name="faixaRendaFinal" 
 						           style="width: 90%"
 						           placeholder="Faixa de Renda Final"
@@ -39,8 +37,8 @@
 			
 			<button class="btn btn-success"
 			        style="margin-left: 40%; margin-top: 20px;"
-			        ng-click="cadastrarMalaDireta(malaDireta)"
-			        ng-disabled="formMalaDireta.$invalid">Cadastrar</button>
+			        ng-click="vm.cadastrarMalaDireta(vm.malaDireta)"
+			        ng-disabled="vm.formMalaDireta.$invalid">Cadastrar</button>
 			
 		</div>
 	</div>
@@ -54,4 +52,3 @@
 	</div>	
 </div>
 
-<div ng-include="'view/listagem.html'"></div>

@@ -5,7 +5,6 @@ angular.module("mDigital").controller("formClienteController", function($locatio
 	vm.isRenderFormCadCliente = true;
 	vm.cliente = null;
 	
-	
 	vm.$onInit = function(){
 		novoCliente();
 		
@@ -17,14 +16,11 @@ angular.module("mDigital").controller("formClienteController", function($locatio
         } else {
             $rootScope.$broadcast("clienteSelecionado", null);
         }	
-        
 	}
-	
 	
 	novoCliente = function(){
 		vm.cliente = null;
 	}
-	
 	
 	vm.salvarCliente = function(cliente){
 		//O cliente já existe
@@ -36,8 +32,6 @@ angular.module("mDigital").controller("formClienteController", function($locatio
 	}	
 	
 	vm.cadastrarCliente = function(cliente){
-		console.log(cliente);
-		
 		clienteAPI.cadastrar(cliente).then(
 				function(data){
 					delete vm.cliente;

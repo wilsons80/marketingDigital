@@ -40,7 +40,7 @@ angular.module("mDigital").controller("loginController", function($location, usu
 							vm.showMessage = false;
 							vm.logado      = true;
 							
-							$location.path("/index");
+							$location.path("/formCliente");
 						}
 					}
 					
