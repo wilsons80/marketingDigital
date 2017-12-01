@@ -55,7 +55,6 @@ public class MalaDiretaTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		//result = prime * result + ((clientes == null) ? 0 : clientes.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((faixaRendaFinal == null) ? 0 : faixaRendaFinal.hashCode());
 		result = prime * result + ((faixaRendaInicial == null) ? 0 : faixaRendaInicial.hashCode());
@@ -73,13 +72,6 @@ public class MalaDiretaTO {
 			return false;
 		MalaDiretaTO other = (MalaDiretaTO) obj;
 		
-		/*
-		if (clientes == null) {
-			if (other.clientes != null)
-				return false;
-		} else if (!clientes.equals(other.clientes))
-			return false;
-		*/
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;

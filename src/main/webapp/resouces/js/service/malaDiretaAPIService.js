@@ -11,8 +11,8 @@ angular.module("mDigital").factory("malaDigitalAPI", function($http, config){
 		return $http.delete(config.baseURL + "maladireta/" + idMalaDireta);
 	};
 	
-	var _getClientesMalaDireta = function(malaDireta){
-		return $http.get(config.baseURL + "cliente/faixaRenda/" + malaDireta.faixaRendaInicial + "/" + malaDireta.faixaRendaFinal);
+	var _getClientesMalaDireta = function(faixaRendaInicial, faixaRendaFinal){
+		return $http.get(config.baseURL + "cliente/faixaRenda/" + faixaRendaInicial + "/" + faixaRendaFinal);
 	};
 	
 	var _alterar = function(malaDireta){

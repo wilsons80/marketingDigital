@@ -36,7 +36,8 @@
 						    </div>
 						    
 						    <div ng-if="vm.isNotHabilitaAlteracaoMalaDireta(malaDireta.codigo)">
-								<a href="#/malaDireta" ng-click="vm.getClientesMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
+								<a href="#/malaDireta/{{malaDireta.faixaRendaInicial}}/{{malaDireta.faixaRendaFinal}}" 
+								   ng-click="vm.filtrarClientesPorMalaDireta(malaDireta)">{{ malaDireta.faixaRendaInicial | currency }} - {{malaDireta.faixaRendaFinal | currency}}</a>  
 						    </div>
 						</td>
 						

@@ -1,6 +1,7 @@
 angular.module("mDigital").controller("formClienteController", function($location, $routeParams, $rootScope, clienteAPI){
 	
 	var vm = this;
+	vm.maxlength = 9;
 	
 	vm.isRenderFormCadCliente = true;
 	vm.cliente = null;

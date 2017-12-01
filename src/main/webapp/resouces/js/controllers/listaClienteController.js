@@ -1,15 +1,24 @@
-angular.module("mDigital").controller("listarClienteController", function($location, $rootScope, clienteAPI){
+angular.module("mDigital").controller("listarClienteController", function($location, $rootScope, $routeParams, clienteAPI, malaDigitalAPI){
 	var vm = this;
 	
 	vm.$onInit = function(){
-		var unbuidCarregarListaClientes = $rootScope.$on("atualizarListaClientes", vm.carregarListaClientes.bind(this));
+		var unbuidCarregarListaClientes        = $rootScope.$on("atualizarListaClientes", vm.carregarListaClientes.bind(this));
+		var unbuidFiltrarClientesPorMalaDireta = $rootScope.$on("filtrarClientesPorMalaDireta", vm.getClientesMalaDireta.bind(this));
 		this.$onDestroy = function () {
 			unbuidCarregarListaClientes();
+			unbuidFiltrarClientesPorMalaDireta();
 		};
-		vm.carregarListaClientes();
+		
+		var faixaRendaInicial = $routeParams["faixaRendaInicial"];
+		var faixaRendaFinal   = $routeParams["faixaRendaFinal"];
+		if(faixaRendaInicial && faixaRendaFinal){
+			vm.getClientesMalaDireta(event,faixaRendaInicial,faixaRendaFinal);
+		}else{
+			vm.carregarListaClientes(event);
+		}
 	}
 
-	vm.carregarListaClientes = function(){
+	vm.carregarListaClientes = function(event){
 		clienteAPI.getClientes().then(function(response){
 			vm.clientes = response.data;
 		});
@@ -19,8 +28,8 @@ angular.module("mDigital").controller("listarClienteController", function($locat
 		$rootScope.$broadcast("clienteSelecionadoRender", cliente.idCliente);
 	}
 	
-	vm.getClientesMalaDireta = function(malaDireta){
-		malaDigitalAPI.getClientesMalaDireta(malaDireta).then( function(response){
+	vm.getClientesMalaDireta = function(event,faixaRendaInicial, faixaRendaFinal){
+		malaDigitalAPI.getClientesMalaDireta(faixaRendaInicial,faixaRendaFinal).then( function(response){
 			vm.clientes = response.data;
 		});
 	};

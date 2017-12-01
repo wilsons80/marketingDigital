@@ -16,11 +16,15 @@ public class AlterarMalaDiretaCmd {
 	private BuscarMalaDiretaByIDCmd buscarMalaDiretaByIdCmd;
 	
 	public MalaDiretaTO alterar(Integer idMalaDireta, MalaDiretaTO malaDiretaTO){
-		MalaDireta malaDireta = new MalaDireta(idMalaDireta, 
-				                               malaDiretaTO.getNome(), 
-				                               malaDiretaTO.getFaixaRendaInicial(), 
-				                               malaDiretaTO.getFaixaRendaFinal());
+		
+		//Busca o objeto da Base de dados para evitar inconsistencia.
+		MalaDireta malaDireta = buscarMalaDiretaByIdCmd.getByID(idMalaDireta);
+		
+		malaDireta.setNome             (malaDiretaTO.getNome());
+		malaDireta.setFaixaRendaInicial(malaDiretaTO.getFaixaRendaInicial());
+		malaDireta.setFaixaRendaFinal  (malaDiretaTO.getFaixaRendaFinal());
 		malaDiretaDAO.update(malaDireta);
+		
 		return buscarMalaDiretaByIdCmd.getMalaDiretaTOByID(idMalaDireta);
 	}
 }

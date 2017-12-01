@@ -35,7 +35,7 @@ angular.module("mDigital").config( function( $routeProvider, $locationProvider )
 		controllerAs: 'vm'
 	});	
 
-	$routeProvider.when('/malaDireta/:id', {
+	$routeProvider.when('/malaDireta/:faixaRendaInicial/:faixaRendaFinal', {
 		templateUrl : 'view/maladireta/formMalaDireta.html',
 		controller : 'listaMalaDiretaController',
 		controllerAs: 'vm'

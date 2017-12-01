@@ -11,7 +11,7 @@ import br.mp.mpdft.mdigital.entity.Cliente;
 import br.mp.mpdft.mdigital.excpetion.ClienteJaCadastradoException;
 import br.mp.mpdft.mdigital.excpetion.EmailClienteNaoInformadoException;
 import br.mp.mpdft.mdigital.excpetion.NomeNaoInformadoException;
-import br.mp.mpdft.mdigital.excpetion.RendaBrutaMensalNaoInformadaException;
+import br.mp.mpdft.mdigital.excpetion.RendaBrutaMensalInvalidaException;
 import br.mp.mpdft.mdigital.to.ClienteTO;
 
 @Component
@@ -25,7 +25,10 @@ public class CadastrarClienteCmd {
 	
 	public ClienteTO cadastrar(ClienteTO clienteTO){
 		if(Objects.isNull(clienteTO.getRendaBrutaMensal())){
-			new RendaBrutaMensalNaoInformadaException("A renda bruta mensal não foi informada.");
+			new RendaBrutaMensalInvalidaException("A renda bruta mensal não foi informada.");
+		}
+		if(clienteTO.getRendaBrutaMensal().toString().replace(".", ",").matches("^[0-9]{0,6},[0-9]{2}$") == Boolean.FALSE){
+			new RendaBrutaMensalInvalidaException("O valor de renda bruta mensal não está formato válido (999999,99) - Valor informado:" + clienteTO.getRendaBrutaMensal());
 		}
 		
 		if(Objects.isNull(clienteTO.getNome())){

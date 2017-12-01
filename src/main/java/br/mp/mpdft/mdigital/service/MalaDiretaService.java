@@ -52,30 +52,6 @@ public class MalaDiretaService {
 		return cadastrarMalaDiretaCmd.cadastrar(malaDiretaTO);
 	}
 	
-	/*
-	@Path("/")
-	@POST
-	@Transactional
-	public ResponseEntity<MalaDiretaTO> cadastrar(MalaDiretaTO malaDiretaTO){
-		try {
-			MalaDiretaTO malaDireta = cadastrarMalaDiretaCmd.cadastrar(malaDiretaTO);
-			return new ResponseEntity<>(malaDireta, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-	}
-
-	@GET
-	@Path("/detalheContato/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<Contato> buscarContato(@PathParam("id") Integer id){
-		Contato contato = buscarContatoCmd.buscarContato(id); 
-		System.out.println(contato);
-		return Objects.nonNull(contato) ? new ResponseEntity<>(contato, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	*/	
-	
-	
 	@Path("/{idMalaDireta}")
 	@DELETE
 	@Transactional

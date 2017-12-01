@@ -6,10 +6,15 @@ angular.module("mDigital").controller("listaMalaDiretaController",function($loca
 		this.$onDestroy = function () {
 			unbuidCarregarListaMalaDireta();
 		};
-		vm.carregarListaMalaDireta();
+		vm.carregarListaMalaDireta(event);
 	};
 	
-	vm.carregarListaMalaDireta = function(){
+	vm.filtrarClientesPorMalaDireta = function(malaDireta){
+		$rootScope.$broadcast("filtrarClientesPorMalaDireta", malaDireta.faixaRendaInicial, malaDireta.faixaRendaFinal);
+	}
+	
+	
+	vm.carregarListaMalaDireta = function(event){
 		malaDigitalAPI.getMalaDiretas().then(function(response){
 			vm.malaDiretas = response.data;
 		});

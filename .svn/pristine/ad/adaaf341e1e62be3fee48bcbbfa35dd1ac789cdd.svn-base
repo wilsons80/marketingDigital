@@ -19,13 +19,13 @@
     
 	<tx:annotation-driven/>
 
-    <!-- Configuração com valor específico para o Tomcat 
+    <!-- Configuração com valor específico para o Tomcat -->
 	<jee:jndi-lookup id="mdigital-ds" jndi-name="java:comp/env/mdigitalDataSource"></jee:jndi-lookup>
-	--> 
+	 
 	
-	<!-- Configuração com valor específico para o WildFly --> 
+	<!-- Configuração com valor específico para o WildFly 
 	<jee:jndi-lookup id="mdigital-ds" jndi-name="java:/jdbc/mdigitalDataSource"></jee:jndi-lookup>
-	
+	--> 
 	
     <!-- Permite que o Hibernate possa realizar suas operações junto com o Spring  -->
 	<bean id="sessionFactory"
