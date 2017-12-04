@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 import br.mp.mpdft.mdigital.builder.MalaDiretaTOBuilder;
 import br.mp.mpdft.mdigital.dao.MalaDiretaDAO;
 import br.mp.mpdft.mdigital.entity.MalaDireta;
-import br.mp.mpdft.mdigital.excpetion.FaixaRendaNaoInformadaException;
 import br.mp.mpdft.mdigital.excpetion.MalaDiretaJaExisteException;
-import br.mp.mpdft.mdigital.excpetion.NomeNaoInformadoException;
+import br.mp.mpdft.mdigital.rule.ValidaFaixaRendaFinalMalaDiretaRule;
+import br.mp.mpdft.mdigital.rule.ValidaFaixaRendaInicialMalaDiretaRule;
+import br.mp.mpdft.mdigital.rule.ValidaFaixaRendaMalaDiretaRule;
+import br.mp.mpdft.mdigital.rule.ValidaNomeMalaDiretaRule;
 import br.mp.mpdft.mdigital.to.MalaDiretaTO;
 
 @Component
@@ -22,17 +24,25 @@ public class CadastrarMalaDiretaCmd {
 	@Autowired
 	private MalaDiretaTOBuilder malaDiretaTOBuilder;
 	
+	@Autowired
+	private ValidaNomeMalaDiretaRule validaNomeMalaDiretaRule;
+	
+	@Autowired
+	private ValidaFaixaRendaInicialMalaDiretaRule validaFaixaRendaInicialMalaDiretaRule;
+	
+	@Autowired
+	private ValidaFaixaRendaFinalMalaDiretaRule validaFaixaRendaFinalMalaDiretaRule;
+	
+	@Autowired
+	private ValidaFaixaRendaMalaDiretaRule validaFaixaRendaMalaDiretaRule;
+	
 	public MalaDiretaTO cadastrar(MalaDiretaTO malaDiretaTO){
 		
-		if(Objects.isNull(malaDiretaTO.getFaixaRendaInicial())){
-			throw new FaixaRendaNaoInformadaException("A faixa de renda inicial da Mala Direta não foi informada.");
-		}
-		if(Objects.isNull(malaDiretaTO.getFaixaRendaFinal())){
-			throw new FaixaRendaNaoInformadaException("A faixa de renda final da Mala Direta não foi informada.");
-		}
-		if(Objects.isNull(malaDiretaTO.getNome())){
-			throw new NomeNaoInformadoException("O nome da Mala Direta não foi informado.");
-		}
+		validaFaixaRendaInicialMalaDiretaRule.valida(malaDiretaTO.getFaixaRendaInicial());
+		validaFaixaRendaFinalMalaDiretaRule.valida(malaDiretaTO.getFaixaRendaFinal());
+		validaNomeMalaDiretaRule.valida(malaDiretaTO.getNome());
+		validaFaixaRendaMalaDiretaRule.valida(malaDiretaTO.getFaixaRendaInicial(), malaDiretaTO.getFaixaRendaFinal());
+		
 		
 		MalaDiretaTO malaPorFaixa = malaDiretaDAO.getMalaDiretaPorFaixa(malaDiretaTO.getFaixaRendaInicial(), malaDiretaTO.getFaixaRendaFinal());
 		if(Objects.nonNull(malaPorFaixa)){

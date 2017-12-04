@@ -52,6 +52,10 @@ angular.module("mDigital").config( function( $routeProvider, $locationProvider )
 		templateUrl : 'view/error.html'
 	});	
 	
+	$routeProvider.when('/errorInterno', {
+		templateUrl : 'view/errorInterno.html'
+	});
+	
 	// caso não seja nenhum desses, redirecione para a rota '/'
 	$routeProvider.otherwise({
 		redirectTo : '/login'

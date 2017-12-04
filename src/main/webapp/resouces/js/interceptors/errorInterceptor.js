@@ -2,11 +2,12 @@ angular.module("mDigital").factory("errorInterceptor", function ($q, $location, 
 	return {
 		responseError: function (rejection) {
 			$rootScope.isError = true;
-			if (rejection.status === 404) {
+			if (rejection.status === 400) {
+				$rootScope.message = rejection.data.message;				
 				$location.path("/error");
 			}
 			if (rejection.status === 500) {
-				$location.path("/error");
+				$location.path("/errorInterno");
 			}
 			return $q.reject(rejection);
 		},

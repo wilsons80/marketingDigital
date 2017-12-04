@@ -1,13 +1,14 @@
 package br.mp.mpdft.mdigital.cmd.cliente;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.mp.mpdft.mdigital.dao.ClienteDAO;
 import br.mp.mpdft.mdigital.entity.Cliente;
-import br.mp.mpdft.mdigital.excpetion.RendaBrutaMensalInvalidaException;
+import br.mp.mpdft.mdigital.rule.ValidaEmailClienteRule;
+import br.mp.mpdft.mdigital.rule.ValidaNomeClienteRule;
+import br.mp.mpdft.mdigital.rule.ValidaRendaBrutaClienteRule;
+import br.mp.mpdft.mdigital.rule.ValidaTelefoneClienteRule;
 import br.mp.mpdft.mdigital.to.ClienteTO;
 
 @Component
@@ -19,14 +20,25 @@ public class AlterarClienteCmd {
 	@Autowired
 	private BuscarClienteByIDCmd buscarClienteByIDCmd;
 	
+	@Autowired
+	private ValidaTelefoneClienteRule validaTelefoneClienteRule;
+	
+	@Autowired
+	private ValidaEmailClienteRule validaEmailClienteRule;
+	
+	@Autowired
+	private ValidaRendaBrutaClienteRule validaRendaBrutaClienteRule;
+	
+	@Autowired
+	private ValidaNomeClienteRule validaNomeClienteRule;
+
+	
 	public ClienteTO alterar(Integer idCliente, ClienteTO clienteTO){
-		
-		if(Objects.isNull(clienteTO.getRendaBrutaMensal())){
-			new RendaBrutaMensalInvalidaException("A renda bruta mensal não foi informada.");
-		}
-		if(clienteTO.getRendaBrutaMensal().toString().replace(".", ",").matches("^[0-9]{0,6},[0-9]{2}$") == Boolean.FALSE){
-			new RendaBrutaMensalInvalidaException("O valor de renda bruta mensal não está formato válido (999999,99) - Valor informado:" + clienteTO.getRendaBrutaMensal());
-		}
+
+		validaRendaBrutaClienteRule.valida(clienteTO.getRendaBrutaMensal());
+		validaNomeClienteRule.valida(clienteTO.getNome());
+		validaEmailClienteRule.valida(clienteTO.getEmail());
+		validaTelefoneClienteRule.valida(clienteTO.getTelefone());
 
 		
 		//Busca o objeto da Base de dados para evitar inconsistencia.

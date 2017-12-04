@@ -74,6 +74,11 @@
 	<!-- FIM: Inicializa o contexto do SPRING através do RestEasy                                     -->
 	<!-- =============================================================================================== -->
 
+
+	<context-param>
+        <param-name>resteasy.providers</param-name>        
+        <param-value>br.mp.mpdft.mdigital.excpetion.handler.ExceptionHandler</param-value>
+	</context-param>
 		
 	
 </web-app>

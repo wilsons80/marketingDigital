@@ -20,14 +20,14 @@
         </span>
 		<span ng-show="vm.formClientes.rendaBrutaMensal.$error.pattern">
 			<div class="alert alert-danger" >
-                A Renda Bruta Mensal deve conter apenas valores numéricos no formado: 999999,99
+                A Renda Bruta Mensal deve conter apenas valores numéricos no formado: 999999 ou 999999.99
 			</div>
         </span>
 	</div>
 	    
 	<div class="headerPainel">
 		<div class="conteudoHeaderPainel">
-			Cadastro de clientes
+			Cadastro de clientes: {{vm.cliente.nome}}
 		</div>
 		<div class="conteudoPainel">
 			<form name="vm.formClientes">
@@ -61,16 +61,16 @@
 						           ng-maxlength="vm.maxlength"
 						           ng-pattern="/^[0-9]{0,9}$/"
 						           style="width: 90%"></td>
-						
+
 						<td>Renda Bruta Mensal:</td>
-						<td><input type="text" 
+						<td><input id="rendaBrutaMensal"
 						           ng-model="vm.cliente.rendaBrutaMensal" 
 						           name="rendaBrutaMensal" 
 						           style="width: 90%"
 						           maxlength="{{vm.maxlength}}"
 						           ng-maxlength=9
 						           placeholder="999999,99"
-						           ng-pattern="/^[0-9]{0,6},[0-9]{2}$/"
+						           ng-pattern="/^[0-9]{0,6}\.?[0-9]{2}$/"
 						           ng-required="true"></td>
 					</tr>
 				</table>
